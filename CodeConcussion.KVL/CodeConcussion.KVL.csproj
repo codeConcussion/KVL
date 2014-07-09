@@ -72,6 +72,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utility\AutofacBootstrapper.cs" />
+    <Compile Include="Utility\EventAggregationSubscriptionModel.cs" />
     <Compile Include="ViewModels\IdentityViewModel.cs" />
     <Compile Include="Views\IdentityView.xaml.cs">
       <DependentUpon>IdentityView.xaml</DependentUpon>
