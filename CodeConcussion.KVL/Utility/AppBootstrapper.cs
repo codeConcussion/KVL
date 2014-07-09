@@ -1,10 +1,10 @@
 ﻿using System.Windows;
+using Caliburn.Micro.Autofac;
 using CodeConcussion.KVL.ViewModels;
 
 namespace CodeConcussion.KVL.Utility
 {
-
-    public class AppBootstrapper : AutofacBootstrapper
+    public class AppBootstrapper : AutofacBootstrapper<ShellViewModel>
     {
         public AppBootstrapper()
         {
@@ -16,5 +16,4 @@ namespace CodeConcussion.KVL.Utility
             DisplayRootViewFor<ShellViewModel>();
         }
     }
-
 }
