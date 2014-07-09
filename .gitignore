@@ -1,0 +1,61 @@
+# Build folders
+[Bb]in/
+[Oo]bj/
+
+# Keep the library folders
+!/Libs
+
+reportdirector.db
+Raven_Data/
+Plugins/
+packages/
+ReportDirector.Data/Raven/
+ReportDirector.Data/Database/
+
+# Merge Conflict Backups
+*.orig
+
+# VS user files
+*.user
+*.suo
+*.sln.cache
+*.[Cc]ache
+
+# Resharper
+_Resharper*
+_ReSharper.*
+*.ReSharper.user
+
+#Sublime
+*.sublime-workspace
+
+*.xap
+*.vspcc
+*.vspscc
+*.vscc
+*.vssscc
+
+# Click-once, web publish
+*.[Pp]ublish.xml
+[Pp]ublish
+WebDeploy/
+
+# Build results
+*.tmp
+*.obj
+*.pdb
+*.pch
+*.tlb
+*.ncb
+
+#Agent packages
+ReportDirector.Agent/bin/*.zip
+
+# Theme
+!ReportDirector.Web/styles/images
+ReportDirector.Web/images/*/
+ReportDirector.Web/Distributions/*
+ReportDirector.Web/styles/*/
+
+/ReportDirector.Common/BCrypt.Net.il
+/ReportDirector.Common/SmartFormat.il
