@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CodeConcussion.KVL.Entity
+﻿namespace CodeConcussion.KVL.Entity
 {
-    class Record
+    internal sealed class Record
     {
+        public int Seconds { get; set; }
+
     }
 }

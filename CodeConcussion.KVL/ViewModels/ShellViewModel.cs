@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Caliburn.Micro;
+using CodeConcussion.KVL.Utility;
 
 namespace CodeConcussion.KVL.ViewModels
 {
@@ -8,6 +9,7 @@ namespace CodeConcussion.KVL.ViewModels
         public ShellViewModel(IdentityViewModel identityViewModel)
         {
             IdentityViewModel = identityViewModel;
+            var decks = DeckConfiguration.Decks;
         }
 
         public IdentityViewModel IdentityViewModel { get; private set; }
