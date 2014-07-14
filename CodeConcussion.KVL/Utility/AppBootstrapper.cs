@@ -20,16 +20,8 @@ namespace CodeConcussion.KVL.Utility
             Application.Current.MainWindow.Height = (SystemParameters.PrimaryScreenHeight * .75);
             Application.Current.MainWindow.Left = (SystemParameters.PrimaryScreenWidth * .125);
             Application.Current.MainWindow.Top = (SystemParameters.PrimaryScreenHeight * .125);
-
-            //Application.Current.MainWindow.SizeToContent = SizeToContent.Manual;
-            //Application.Current.MainWindow.Width = 500;
-            //Application.Current.MainWindow.Height = 350;
-            //Application.Current.MainWindow.Left = 10;
-            //Application.Current.MainWindow.Top = 10;
-
-            //ClearValue(SizeToContentProperty);
-            //LayoutRoot.ClearValue(WidthProperty);
-            //LayoutRoot.ClearValue(HeightProperty);
+            Application.Current.MainWindow.MinWidth = 352;
+            Application.Current.MainWindow.MinHeight = 320;
         }
     }
 }
