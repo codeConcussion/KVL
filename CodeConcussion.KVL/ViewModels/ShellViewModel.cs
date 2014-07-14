@@ -1,39 +1,41 @@
-﻿using System.Windows;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using CodeConcussion.KVL.Utility;
 
 namespace CodeConcussion.KVL.ViewModels
 {
     public sealed class ShellViewModel : PropertyChangedBase
     {
-        public ShellViewModel(IdentityViewModel identityViewModel)
+        public ShellViewModel(GameViewModel gameViewModel, IdentityViewModel identityViewModel)
         {
+            GameViewModel = gameViewModel;
             IdentityViewModel = identityViewModel;
             var decks = DeckConfiguration.Decks;
         }
 
+        public GameViewModel GameViewModel { get; private set; }
         public IdentityViewModel IdentityViewModel { get; private set; }
 
-        private string _name;
-        public string Name
+        private int _height;
+        public int Height
         {
-            get { return _name; }
+            get { return _height; }
             set
             {
-                _name = value;
-                NotifyOfPropertyChange(() => Name);
-                NotifyOfPropertyChange(() => CanSayHello);
+                _height = value;
+                MinWidth = value * 2;
             }
         }
 
-        public bool CanSayHello
+        private int _minWidth;
+        public int MinWidth
         {
-            get { return !string.IsNullOrWhiteSpace(Name); }
-        }
-
-        public void SayHello()
-        {
-            MessageBox.Show(string.Format("Hello {0}!", Name)); //Don't do this in real life :)
+            get { return _minWidth; }
+            set
+            {
+                if (_minWidth == value) return;
+                _minWidth = value;
+                NotifyOfPropertyChange(() => MinWidth);
+            }
         }
     }
 }

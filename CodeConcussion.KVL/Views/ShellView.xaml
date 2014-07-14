@@ -1,11 +1,12 @@
 ﻿<UserControl
     x:Class="CodeConcussion.KVL.Views.ShellView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
-    <StackPanel>
-        <TextBox x:Name="Name" />
-        <Button x:Name="SayHello" Content="Click Me" />
-        <ContentControl Name="IdentityViewModel" Margin="10" />
-    </StackPanel>
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="{Binding Height, Mode=OneWayToSource}"
+    MinWidth="{Binding MinWidth, Mode=OneWay}">
+
+    <DockPanel>
+        <!--<ContentControl Name="IdentityViewModel" Margin="10" />-->
+        <ContentControl Name="GameViewModel" />
+    </DockPanel>
 </UserControl>
