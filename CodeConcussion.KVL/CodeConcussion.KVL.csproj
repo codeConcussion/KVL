@@ -83,6 +83,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Entity\User.cs" />
     <Compile Include="Messages\OpenRecords.cs" />
     <Compile Include="Messages\CloseRecords.cs" />
     <Compile Include="Messages\CloseUser.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Entity\Group.cs" />
     <Compile Include="Entity\Record.cs" />
     <Compile Include="Entity\Operation.cs" />
+    <Compile Include="Utility\EnumerableExtensions.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\RecordsViewModel.cs" />

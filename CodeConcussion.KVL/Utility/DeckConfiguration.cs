@@ -23,7 +23,12 @@ namespace CodeConcussion.KVL.Utility
 
         private static Deck DeserializeDeck(string json)
         {
-            try { return JsonConvert.DeserializeObject<Deck>(json); }
+            try
+            {
+                var deck = JsonConvert.DeserializeObject<Deck>(json);
+                deck.Cards.ForEach(x => x.Operation = deck.Operation);
+                return deck;
+            }
             catch { return null; }
         }
     }

@@ -11,13 +11,6 @@ namespace CodeConcussion.KVL.Entity
         public Operation Operation { get; set; }
         public List<Card> Cards { get; set; }
 
-        public int GetAnswer(Card card)
-        {
-            if (Operation == Operation.Addition) return card.FirstNumber + card.SecondNumber;
-            if (Operation == Operation.Multiplication) return card.FirstNumber * card.SecondNumber;
-            return 0;
-        }
-        
         public void Shuffle()
         {
             var random = new Random();
