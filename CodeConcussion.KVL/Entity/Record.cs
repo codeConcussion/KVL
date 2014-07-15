@@ -2,7 +2,8 @@
 {
     internal sealed class Record
     {
-        public int Seconds { get; set; }
-
+        public string Name { get; set; }
+        public Operation Operation { get; set; }
+        public decimal Seconds { get; set; }
     }
 }

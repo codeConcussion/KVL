@@ -30,7 +30,7 @@ namespace CodeConcussion.KVL.ViewModels
         {
             if (string.IsNullOrWhiteSpace(User)) return;
 
-            var user = new User { Name = User };
+            var user = new User(User);
             //TODO:load records
             Context.User = user;
             

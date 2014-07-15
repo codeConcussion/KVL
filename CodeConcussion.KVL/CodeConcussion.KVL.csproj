@@ -97,6 +97,7 @@
     <Compile Include="Entity\Record.cs" />
     <Compile Include="Entity\Operation.cs" />
     <Compile Include="Utility\EnumerableExtensions.cs" />
+    <Compile Include="Utility\UserStorage.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\RecordsViewModel.cs" />

@@ -1,4 +1,6 @@
-﻿using Caliburn.Micro;
+﻿using System.Linq;
+using Caliburn.Micro;
+using CodeConcussion.KVL.Entity;
 using CodeConcussion.KVL.Messages;
 using CodeConcussion.KVL.Utility;
 
@@ -17,6 +19,14 @@ namespace CodeConcussion.KVL.ViewModels
             RecordsViewModel = recordsViewModel;
             UserViewModel = userViewModel;
             var decks = DeckConfiguration.Decks;
+
+            //var user = new User("Toby");
+            //user.Records = UserStorage.LoadRecords(user.Name).ToList();
+
+            //var user = new User("Toby");
+            //user.Records.Add(new Record {Name = "One-Away", Operation = Operation.Addition, Seconds = 10m});
+            //user.Records.Add(new Record {Name = "Whole Deck", Operation = Operation.Addition, Seconds = 20m});
+            //UserStorage.SaveRecords(user);
         }
 
         public GameViewModel GameViewModel { get; private set; }
