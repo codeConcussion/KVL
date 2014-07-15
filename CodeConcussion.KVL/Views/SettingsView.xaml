@@ -9,7 +9,7 @@
         <Button x:Name="OpenUser">
             <Image Source="/Resources/Placeholder.png" />
         </Button>
-        <Button>
+        <Button x:Name="OpenRecords">
             <Image Source="/Resources/Placeholder.png" />
         </Button>
         <Button>

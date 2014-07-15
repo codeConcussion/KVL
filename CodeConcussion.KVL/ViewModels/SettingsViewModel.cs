@@ -1,5 +1,4 @@
-﻿using System;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using CodeConcussion.KVL.Messages;
 
 namespace CodeConcussion.KVL.ViewModels
@@ -16,6 +15,11 @@ namespace CodeConcussion.KVL.ViewModels
         public void OpenUser()
         {
             _eventAggregator.Publish(new OpenUser(), x => x());
+        }
+
+        public void OpenRecords()
+        {
+            _eventAggregator.Publish(new OpenRecords(), x => x());
         }
     }
 }

@@ -16,16 +16,22 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        
-        <ContentControl Name="SettingsViewModel" />
-        <ContentControl Name="GameViewModel" Grid.Column="1" />
-        
+
+        <ContentControl x:Name="SettingsViewModel" />
+        <ContentControl x:Name="GameViewModel" Grid.Column="1" />
+
+        <Border x:Name="IsRecordsActive" Style="{StaticResource FadeIn}" Grid.ColumnSpan="2">
+            <Border.Background>
+                <SolidColorBrush Color="Black" Opacity=".7" />
+            </Border.Background>
+            <ContentControl x:Name="RecordsViewModel" />
+        </Border>
+
         <Border x:Name="IsUserActive" Style="{StaticResource FadeIn}" Grid.ColumnSpan="2"> 
             <Border.Background>
                 <SolidColorBrush Color="Black" Opacity=".7" />
             </Border.Background>
-            <!--<collections:ContractView x:Name="ContractView" />-->
-            <ContentControl Name="UserViewModel" />
+            <ContentControl x:Name="UserViewModel" />
         </Border>
     </Grid>
 </UserControl>
