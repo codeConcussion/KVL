@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Text;
 using CodeConcussion.KVL.Entity;
 using Newtonsoft.Json;
@@ -11,34 +9,31 @@ namespace CodeConcussion.KVL.Utility
 {
     internal static class UserStorage
     {
-        public static List<Record> LoadRecords(string userName)
+        public static User LoadUser(string userName)
         {
-            if (string.IsNullOrWhiteSpace(userName)) return new List<Record>();
-
-            var file = GetRecordFile(userName);
+            var file = GetUserFile(userName);
             var serialized = File.ReadAllText(file);
             var decoded = Convert.FromBase64String(serialized);
             var json = Encoding.ASCII.GetString(decoded);
-            var records = JsonConvert.DeserializeObject<List<Record>>(json);
-            return records;
+            var user = JsonConvert.DeserializeObject<User>(json);
+            return user;
         }
 
-        public static void SaveRecords(User user)
+        public static void SaveUser(User user)
         {
             if (user == null) return;
-            if (!user.Records.Any()) return;
             if (string.IsNullOrWhiteSpace(user.Name)) return;
 
-            var file = GetRecordFile(user.Name);
-            var json = JsonConvert.SerializeObject(user.Records, Formatting.Indented);
+            var file = GetUserFile(user.Name);
+            var json = JsonConvert.SerializeObject(user, Formatting.Indented);
             var serialized = Encoding.ASCII.GetBytes(json);
             var encoded = Convert.ToBase64String(serialized);
             File.WriteAllText(file, encoded);
         }
 
-        private static string GetRecordFile(string userName)
+        private static string GetUserFile(string userName)
         {
-            var setting = ConfigurationManager.AppSettings["RecordDirectory"] ?? @".\Records";
+            var setting = ConfigurationManager.AppSettings["UserDirectory"] ?? @".\Users";
             var directory = Path.GetFullPath(setting);
             if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
             return Path.Combine(directory, userName + ".kvl");
