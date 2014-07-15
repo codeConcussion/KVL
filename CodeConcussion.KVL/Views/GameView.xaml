@@ -16,7 +16,7 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" MinWidth="100" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         
         <views:CardView Margin="16"/>
@@ -26,9 +26,5 @@
             Grid.Column="1"
             Grid.RowSpan="2"
             Grid.ColumnSpan="2" />
-        <views:SettingsView
-            Grid.Row="0"
-            Grid.Column="3"
-            Grid.RowSpan="3"/>
     </Grid>
 </UserControl>

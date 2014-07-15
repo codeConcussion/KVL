@@ -1,8 +1,8 @@
 ﻿namespace CodeConcussion.KVL.Views
 {
-    public partial class SettingsView
+    public partial class UserView
     {
-        public SettingsView()
+        public UserView()
         {
             InitializeComponent();
         }

@@ -11,6 +11,12 @@ namespace CodeConcussion.KVL.Utility
             Initialize();
         }
 
+        protected override void ConfigureBootstrapper()
+        {
+            base.ConfigureBootstrapper();
+            AutoSubscribeEventAggegatorHandlers = true;
+        }
+
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
             DisplayRootViewFor<ShellViewModel>();
@@ -20,8 +26,10 @@ namespace CodeConcussion.KVL.Utility
             Application.Current.MainWindow.Height = (SystemParameters.PrimaryScreenHeight * .75);
             Application.Current.MainWindow.Left = (SystemParameters.PrimaryScreenWidth * .125);
             Application.Current.MainWindow.Top = (SystemParameters.PrimaryScreenHeight * .125);
-            Application.Current.MainWindow.MinWidth = 352;
-            Application.Current.MainWindow.MinHeight = 320;
+            //Application.Current.MainWindow.MinWidth = 352;
+            //Application.Current.MainWindow.MinHeight = 320;
+            Application.Current.MainWindow.MinWidth = 458;
+            Application.Current.MainWindow.MinHeight = 334;
         }
     }
 }

@@ -3,8 +3,29 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <DockPanel>
-        <!--<ContentControl Name="IdentityViewModel" Margin="10" />-->
-        <ContentControl Name="GameViewModel" />
-    </DockPanel>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <ContentControl Name="SettingsViewModel" />
+        <ContentControl Name="GameViewModel" Grid.Column="1" />
+        
+        <Border x:Name="IsUserActive" Style="{StaticResource FadeIn}" Grid.ColumnSpan="2"> 
+            <Border.Background>
+                <SolidColorBrush Color="Black" Opacity=".7" />
+            </Border.Background>
+            <!--<collections:ContractView x:Name="ContractView" />-->
+            <ContentControl Name="UserViewModel" />
+        </Border>
+    </Grid>
 </UserControl>
