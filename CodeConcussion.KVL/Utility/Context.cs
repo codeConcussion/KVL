@@ -1,7 +1,9 @@
-﻿namespace CodeConcussion.KVL.Utility
+﻿using CodeConcussion.KVL.Entity;
+
+namespace CodeConcussion.KVL.Utility
 {
-    public static class Context
+    internal static class Context
     {
-        public static string User { get; set; }
+        public static User User { get; set; }
     }
 }

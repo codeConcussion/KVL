@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using CodeConcussion.KVL.Entity;
 using CodeConcussion.KVL.Messages;
 using CodeConcussion.KVL.Utility;
 
@@ -22,13 +23,17 @@ namespace CodeConcussion.KVL.ViewModels
 
         public void Cancel()
         {
-            Close();
+            if (!string.IsNullOrWhiteSpace(User)) Close();
         }
 
         public void Ok()
         {
-            Context.User = User;
-            //TODO:load user info
+            if (string.IsNullOrWhiteSpace(User)) return;
+
+            var user = new User { Name = User };
+            //TODO:load records
+            Context.User = user;
+            
             Close();
         }
     }
