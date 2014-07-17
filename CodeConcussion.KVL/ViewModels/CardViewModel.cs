@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using Caliburn.Micro;
 using CodeConcussion.KVL.Entity;
+using CodeConcussion.KVL.Utility;
 
 namespace CodeConcussion.KVL.ViewModels
 {
@@ -14,64 +15,44 @@ namespace CodeConcussion.KVL.ViewModels
             {
                 _card = value;
                 NotifyOfPropertyChange(() => Card);
-                NotifyOfPropertyChange(() => FirstNumber);
-                NotifyOfPropertyChange(() => SecondNumber);
-                NotifyOfPropertyChange(() => Operation);
+                NotifyOfPropertyChange(() => FirstLine);
+                NotifyOfPropertyChange(() => SecondLine);
+                Answer = "";
+            }
+        }
+
+        public string FirstLine
+        {
+            get { return Card.FirstNumber.ToString(CultureInfo.InvariantCulture).PadLeft(2); }
+        }
+
+        public string SecondLine
+        {
+            get { return Card.Operation.GetSign() + Card.SecondNumber.ToString(CultureInfo.InvariantCulture).PadLeft(2); }
+        }
+
+        private string _answer;
+        public string Answer
+        {
+            get { return _answer ?? (_answer = ""); }
+            set
+            {
+                if (_answer == value) return;
+                _answer = value;
                 NotifyOfPropertyChange(() => Answer);
             }
         }
 
-        public string FirstNumber
+        public void AddDigit(int digit)
         {
-            get { return Card.FirstNumber.ToString().PadLeft(2); }
-            set
-            {
-                if (Card.FirstNumber.ToString() == value) return;
-                Card.FirstNumber = int.Parse(value);
-                NotifyOfPropertyChange(() => FirstNumber);
-                NotifyOfPropertyChange(() => Answer);
-            }
+            var added = (Answer + digit).PadLeft(3);
+            Answer = added.Substring(added.Length - 3, 3);
         }
 
-        public string SecondNumber
+        public void RemoveDigit()
         {
-            get { return Card.SecondNumber.ToString().PadLeft(2); }
-            set
-            {
-                if (Card.SecondNumber.ToString() == value) return;
-                Card.SecondNumber = int.Parse(value);
-                NotifyOfPropertyChange(() => SecondNumber);
-                NotifyOfPropertyChange(() => Answer);
-            }
-        }
-
-        public Operation Operation
-        {
-            get { return Card.Operation; }
-            set
-            {
-                if (Card.Operation == value) return;
-                Card.Operation = value;
-                NotifyOfPropertyChange(() => Operation);
-                NotifyOfPropertyChange(() => Answer);
-            }
-        }
-        
-        public int Answer
-        {
-            get { return Card.Answer; }
-        }
-
-        private string _enteredAnswer;
-        public string EnteredAnswer
-        {
-            get { return _enteredAnswer ?? (_enteredAnswer = ""); }
-            set
-            {
-                if (_enteredAnswer == value) return;
-                _enteredAnswer = value;
-                NotifyOfPropertyChange(() => EnteredAnswer);
-            }
+            var length = Answer.Length;
+            Answer = length <= 1 ? "" : Answer.Substring(0, length - 1);
         }
     }
 }

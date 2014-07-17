@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using Caliburn.Micro;
 using CodeConcussion.KVL.Entity;
@@ -36,14 +35,19 @@ namespace CodeConcussion.KVL.ViewModels
             }
         }
 
-        public void Clear()
+        private void AddDigit(int digit)
         {
-            CurrentCardView.EnteredAnswer = "";
+            CurrentCardView.AddDigit(digit);
         }
 
-        public void Delete()
+        private void Clear()
         {
+            CurrentCardView.Answer = "";
+        }
 
+        private void Delete()
+        {
+            CurrentCardView.RemoveDigit();
         }
 
         public void Start()
@@ -59,69 +63,37 @@ namespace CodeConcussion.KVL.ViewModels
             if (args == null) return;
 
             args.Handled = true;
-            var key = args.Key;
-
-            var isAction = ActionMap.ContainsKey(key);
-            if (isAction)
-            {
-                var action = ActionMap[key];
-            }
-
-            var isDigit = DigitMap.ContainsKey(key);
-            if (isDigit) CurrentCardView.EnteredAnswer += DigitMap[key];
-
-            //if (isNumber) Testing += DigitConverter.ConvertToString(args.Key);
+            var isAction = ActionMap.ContainsKey(args.Key);
+            if (isAction) ActionMap[args.Key](this);
         }
 
-        #region Maps
-
-        private enum GameAction
+        private static readonly Dictionary<Key, Action<GameViewModel>> ActionMap = new Dictionary<Key, Action<GameViewModel>>
         {
-            Clear,
-            Delete,
-            Answer
-        }
-        
-        private static readonly Dictionary<Key, GameAction> ActionMap = new Dictionary<Key, GameAction>
-        {
-            { Key.Escape, GameAction.Clear },
-            { Key.Back, GameAction.Delete },
-            { Key.Delete, GameAction.Delete },
-            { Key.Enter, GameAction.Answer },
-            //{ Key.Return, GameAction.Answer }
+            { Key.Escape, x => x.Clear() },
+            { Key.Back, x => x.Delete() },
+            { Key.Delete, x => x.Delete() },
+            { Key.Decimal, x => x.Delete() },
+            { Key.Enter, x => x.Answer() },
+            { Key.D0, x => x.AddDigit(0) },
+            { Key.D1, x => x.AddDigit(1) },
+            { Key.D2, x => x.AddDigit(2) },
+            { Key.D3, x => x.AddDigit(3) },
+            { Key.D4, x => x.AddDigit(4) },
+            { Key.D5, x => x.AddDigit(5) },
+            { Key.D6, x => x.AddDigit(6) },
+            { Key.D7, x => x.AddDigit(7) },
+            { Key.D8, x => x.AddDigit(8) },
+            { Key.D9, x => x.AddDigit(9) },
+            { Key.NumPad0, x => x.AddDigit(0) },
+            { Key.NumPad1, x => x.AddDigit(1) },
+            { Key.NumPad2, x => x.AddDigit(2) },
+            { Key.NumPad3, x => x.AddDigit(3) },
+            { Key.NumPad4, x => x.AddDigit(4) },
+            { Key.NumPad5, x => x.AddDigit(5) },
+            { Key.NumPad6, x => x.AddDigit(6) },
+            { Key.NumPad7, x => x.AddDigit(7) },
+            { Key.NumPad8, x => x.AddDigit(8) },
+            { Key.NumPad9, x => x.AddDigit(9) }
         };
-
-        private static readonly Dictionary<GameAction, Action<GameViewModel>> Foo = new Dictionary<GameAction, Action<GameViewModel>>
-        {
-            { GameAction.Clear, x => x.Clear() },
-            { GameAction.Delete, x => x.Delete() },
-            { GameAction.Answer, x => x.Answer() }
-        };
-
-        private static readonly Dictionary<Key, int> DigitMap = new Dictionary<Key, int>
-        {
-            { Key.D0, 0 },
-            { Key.D1, 1 },
-            { Key.D2, 2 },
-            { Key.D3, 3 },
-            { Key.D4, 4 },
-            { Key.D5, 5 },
-            { Key.D6, 6 },
-            { Key.D7, 7 },
-            { Key.D8, 8 },
-            { Key.D9, 9 },
-            { Key.NumPad0, 0 },
-            { Key.NumPad1, 1 },
-            { Key.NumPad2, 2 },
-            { Key.NumPad3, 3 },
-            { Key.NumPad4, 4 },
-            { Key.NumPad5, 5 },
-            { Key.NumPad6, 6 },
-            { Key.NumPad7, 7 },
-            { Key.NumPad8, 8 },
-            { Key.NumPad9, 9 }
-        };
-
-        #endregion
     }
 }
