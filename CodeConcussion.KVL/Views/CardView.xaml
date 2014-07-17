@@ -7,9 +7,9 @@
 
     <UserControl.Resources>
         <Style TargetType="{x:Type Label}">
-            <Setter Property="FontFamily" Value="Tahoma" />
+            <Setter Property="FontFamily" Value="pack://application:,,,/Resources/#Lucida Console" />
             <Setter Property="HorizontalContentAlignment" Value="Right" />
-            <Setter Property="Margin" Value="4 0" />
+            <Setter Property="Margin" Value="4 2" />
             <Setter Property="Padding" Value="0" />
         </Style>
 
@@ -30,10 +30,9 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="FirstNumber" Grid.Column="1" />
-            <!--<Label x:Name="Operation" Grid.Row="1" />-->
+            <Label x:Name="FirstNumber" xml:space="preserve" Grid.Column="1" />
             <Label Content="{Binding Operation, Converter={StaticResource OperationConverter}}" Grid.Row="1" />
-            <Label x:Name="SecondNumber" Grid.Row="1" Grid.Column="1" />
+            <Label x:Name="SecondNumber" xml:space="preserve" Grid.Row="1" Grid.Column="1" />
             <Rectangle
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Top"

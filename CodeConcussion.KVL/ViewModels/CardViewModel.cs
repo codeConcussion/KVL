@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System.Globalization;
+using Caliburn.Micro;
 using CodeConcussion.KVL.Entity;
 
 namespace CodeConcussion.KVL.ViewModels
@@ -20,25 +21,25 @@ namespace CodeConcussion.KVL.ViewModels
             }
         }
 
-        public int FirstNumber
+        public string FirstNumber
         {
-            get { return Card.FirstNumber; }
+            get { return Card.FirstNumber.ToString().PadLeft(2); }
             set
             {
-                if (Card.FirstNumber == value) return;
-                Card.FirstNumber = value;
+                if (Card.FirstNumber.ToString() == value) return;
+                Card.FirstNumber = int.Parse(value);
                 NotifyOfPropertyChange(() => FirstNumber);
                 NotifyOfPropertyChange(() => Answer);
             }
         }
 
-        public int SecondNumber
+        public string SecondNumber
         {
-            get { return Card.SecondNumber; }
+            get { return Card.SecondNumber.ToString().PadLeft(2); }
             set
             {
-                if (Card.SecondNumber == value) return;
-                Card.SecondNumber = value;
+                if (Card.SecondNumber.ToString() == value) return;
+                Card.SecondNumber = int.Parse(value);
                 NotifyOfPropertyChange(() => SecondNumber);
                 NotifyOfPropertyChange(() => Answer);
             }
