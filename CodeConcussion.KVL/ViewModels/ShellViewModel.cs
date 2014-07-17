@@ -1,11 +1,17 @@
-﻿using Caliburn.Micro;
-using CodeConcussion.KVL.Entity;
+﻿using System.Data.Odbc;
+using Caliburn.Micro;
 using CodeConcussion.KVL.Messages;
 using CodeConcussion.KVL.Utility;
 
 namespace CodeConcussion.KVL.ViewModels
 {
-    public sealed class ShellViewModel : PropertyChangedBase, IHandle<OpenRecords>, IHandle<CloseRecords>, IHandle<OpenUser>, IHandle<CloseUser>
+    public sealed class ShellViewModel :
+        PropertyChangedBase,
+        IHandle<OpenRecords>,
+        IHandle<CloseRecords>,
+        IHandle<OpenUser>,
+        IHandle<CloseUser>,
+        IHandle<StartGame>
     {
         public ShellViewModel(
             GameViewModel gameViewModel,
@@ -31,8 +37,18 @@ namespace CodeConcussion.KVL.ViewModels
         public RecordsViewModel RecordsViewModel { get; private set; }
         public UserViewModel UserViewModel { get; private set; }
 
+        #region Game
+
+        public void Handle(StartGame message)
+        {
+            GameViewModel.Game = message.Game;
+            GameViewModel.Start();
+        }
+
+        #endregion
+
         #region Records
-        
+
         private bool _isRecordsActive;
         public bool IsRecordsActive
         {

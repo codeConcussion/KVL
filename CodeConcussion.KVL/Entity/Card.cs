@@ -1,19 +1,23 @@
-﻿namespace CodeConcussion.KVL.Entity
+﻿using System;
+using System.Collections.Generic;
+
+namespace CodeConcussion.KVL.Entity
 {
-    internal sealed class Card
+    public sealed class Card
     {
-        public Operation Operation { get; set; }
         public int FirstNumber { get; set; }
         public int SecondNumber { get; set; }
+        public Operation Operation { get; set; }
 
         public int Answer
         {
-            get
-            {
-                if (Operation == Operation.Addition) return FirstNumber + SecondNumber;
-                if (Operation == Operation.Multiplication) return FirstNumber * SecondNumber;
-                return 0;
-            }
+            get { return _answerStrategy[Operation](FirstNumber, SecondNumber); }
         }
+
+        private readonly Dictionary<Operation, Func<int, int, int>> _answerStrategy = new Dictionary<Operation, Func<int, int, int>>
+        {
+            { Operation.Addition, (x, y) => x + y },
+            { Operation.Multiplication, (x, y) => x * y }
+        };
     }
 }

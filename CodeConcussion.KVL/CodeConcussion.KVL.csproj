@@ -83,7 +83,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\OperationToStringConverter.cs" />
     <Compile Include="Entity\User.cs" />
+    <Compile Include="Messages\StartGame.cs" />
     <Compile Include="Messages\OpenRecords.cs" />
     <Compile Include="Messages\CloseRecords.cs" />
     <Compile Include="Messages\CloseUser.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Entity\Operation.cs" />
     <Compile Include="Utility\EnumerableExtensions.cs" />
     <Compile Include="Utility\UserStorage.cs" />
+    <Compile Include="ViewModels\CardViewModel.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\RecordsViewModel.cs" />

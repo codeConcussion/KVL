@@ -11,16 +11,30 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+
+        <!--<views:CardView
+            Margin="16"/>-->
+
+        <!--<views:CardView
+            Margin="16"
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="2" />-->
         
-        <views:CardView Margin="16"/>
-        <views:CardView
+        <ContentControl
+            x:Name="PreviewCardView"
+            Margin="16" />
+        
+        <ContentControl
+            x:Name="CurrentCardView"
             Margin="16"
             Grid.Row="1"
             Grid.Column="1"
