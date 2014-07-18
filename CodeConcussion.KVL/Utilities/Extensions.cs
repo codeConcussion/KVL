@@ -17,7 +17,7 @@ namespace CodeConcussion.KVL.Utilities
         public static string GetSign(this Operation value)
         {
             if (value == Operation.Addition) return "+";
-            if (value == Operation.Multiplication) return "*";
+            if (value == Operation.Multiplication) return "x";
             return "";
         }
     }

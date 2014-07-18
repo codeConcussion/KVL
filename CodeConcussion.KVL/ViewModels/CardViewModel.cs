@@ -60,10 +60,6 @@ namespace CodeConcussion.KVL.ViewModels
             if (answer.All(x => x == '0')) answer = "0";
             if (answer.Length > 1) answer = answer.TrimStart('0');
             Answer = answer;
-
-            //var added = (Answer + digit).PadLeft(3);
-            //var answer = added.Substring(added.Length - 3, 3);
-            //Answer = answer;
         }
 
         public void RemoveDigit()

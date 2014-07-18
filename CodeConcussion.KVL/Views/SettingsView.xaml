@@ -18,10 +18,10 @@
             <Setter Property="Margin" Value="4" />
         </Style>
 
-        <Style TargetType="{x:Type TextBlock}">
+        <Style TargetType="{x:Type Label}">
             <Setter Property="FontFamily" Value="pack://application:,,,/Resources/#Lucida Console" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="TextAlignment" Value="Right" />
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
         </Style>
     </UserControl.Resources>
 
@@ -55,11 +55,12 @@
             <Image Source="/Resources/Records.png" />
         </Button>
 
-        <Viewbox Margin="8">
-            <StackPanel>
-                <TextBlock x:Name="Timing" />
-                <TextBlock x:Name="Progress" />
-            </StackPanel>
+        <Viewbox>
+            <Label x:Name="Timing" />
+        </Viewbox>
+
+        <Viewbox>
+            <Label x:Name="Progress" />
         </Viewbox>
     </StackPanel>
 </UserControl>

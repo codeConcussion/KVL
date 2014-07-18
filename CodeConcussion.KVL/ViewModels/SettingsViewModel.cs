@@ -104,20 +104,29 @@ namespace CodeConcussion.KVL.ViewModels
 
         public void StartGame()
         {
-            //TODO:select deck
-            var deck = Context.Decks.First(x => x.Key == "AddTens");
-            _eventAggregator.Publish(new StartGame(deck), x => x());
+            _eventAggregator.Publish(new StartGame(SelectedDeck), x => x());
+            StartTimer();
+            UpdateProgress(1);
+        }
 
-            _progress = 1;
+        public void StopGame()
+        {
+            //TODO:finish
+        }
+
+        private void StartTimer()
+        {
             _started = DateTime.Now;
             _timer.Interval = TimeSpan.FromMilliseconds(100);
             _timer.Start();
         }
 
-        public void Handle(CorrectAnswer message)
+        private void UpdateProgress(int progress)
         {
-            _progress++;
+            _progress = progress;
             NotifyOfPropertyChange(() => Progress);
         }
+
+        public void Handle(CorrectAnswer message) { UpdateProgress(_progress + 1); }
     }
 }
