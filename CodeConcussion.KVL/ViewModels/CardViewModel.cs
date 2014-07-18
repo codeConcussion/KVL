@@ -43,6 +43,15 @@ namespace CodeConcussion.KVL.ViewModels
             }
         }
 
+        public bool IsCorrect
+        {
+            get
+            {
+                var answer = int.Parse("0" + Answer.Trim());
+                return answer == Card.Answer;
+            }
+        }
+
         public void AddDigit(int digit)
         {
             var added = (Answer + digit).PadLeft(3);

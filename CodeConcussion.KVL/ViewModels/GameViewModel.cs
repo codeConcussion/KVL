@@ -19,20 +19,29 @@ namespace CodeConcussion.KVL.ViewModels
             EventManager.RegisterClassHandler(typeof(Control), UIElement.KeyDownEvent, new RoutedEventHandler(KeyDown));
         }
 
+        public Game Game { get; set; }
         public CardViewModel CurrentCardView { get; private set; }
         public CardViewModel PreviewCardView { get; private set; }
 
-        public Game Game { get; set; }
-        
+        public bool IsAnswerWrong
+        {
+            get { return !CurrentCardView.IsCorrect; }
+        }
+
         public void Answer()
         {
-            //if (CurrentCardView.IsCorrect)
-            if (true)
+            if (CurrentCardView.IsCorrect)
             {
                 CurrentCardView.Card = PreviewCardView.Card;
                 PreviewCardView.Card = Game.Deck.Deal();
-                Clear();
             }
+            else
+            {
+                //TODO:error animation
+            }
+
+            NotifyOfPropertyChange(() => IsAnswerWrong);
+            Clear();
         }
 
         private void AddDigit(int digit)
@@ -67,6 +76,8 @@ namespace CodeConcussion.KVL.ViewModels
             if (isAction) ActionMap[args.Key](this);
         }
 
+        #region Action Map
+
         private static readonly Dictionary<Key, Action<GameViewModel>> ActionMap = new Dictionary<Key, Action<GameViewModel>>
         {
             { Key.Escape, x => x.Clear() },
@@ -95,5 +106,7 @@ namespace CodeConcussion.KVL.ViewModels
             { Key.NumPad8, x => x.AddDigit(8) },
             { Key.NumPad9, x => x.AddDigit(9) }
         };
+
+        #endregion
     }
 }

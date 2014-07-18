@@ -2,9 +2,18 @@
     x:Class="CodeConcussion.KVL.Views.GameView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:views="clr-namespace:CodeConcussion.KVL.Views"
     Background="Green">
 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+        </ResourceDictionary>
+        
+    </UserControl.Resources>
+    
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -19,23 +28,22 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!--<views:CardView
-            Margin="16"/>-->
+        <ContentControl
+            x:Name="PreviewCardView"
+            Margin="16" />
 
-        <!--<views:CardView
+        <ContentControl
+            x:Name="CurrentCardView"
             Margin="16"
             Grid.Row="1"
             Grid.Column="1"
             Grid.RowSpan="2"
-            Grid.ColumnSpan="2" />-->
-        
-        <ContentControl
-            x:Name="PreviewCardView"
-            Margin="16" />
-        
-        <ContentControl
-            x:Name="CurrentCardView"
-            Margin="16"
+            Grid.ColumnSpan="2" />
+
+        <Label
+            Style="{StaticResource WrongAnswer}"
+            Visibility="{Binding IsAnswerWrong, Converter={StaticResource BooleanToVisibility}}"
+            Background="WhiteSmoke"
             Grid.Row="1"
             Grid.Column="1"
             Grid.RowSpan="2"
