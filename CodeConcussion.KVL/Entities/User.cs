@@ -2,7 +2,7 @@
 
 namespace CodeConcussion.KVL.Entities
 {
-    internal sealed class User
+    public sealed class User
     {
         public User(string name)
         {

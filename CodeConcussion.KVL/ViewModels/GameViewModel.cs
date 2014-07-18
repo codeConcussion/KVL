@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using Caliburn.Micro;
 using CodeConcussion.KVL.Entities;
+using CodeConcussion.KVL.Messages;
 using Control = System.Windows.Controls.Control;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
@@ -12,15 +13,21 @@ namespace CodeConcussion.KVL.ViewModels
 {
     public sealed class GameViewModel : PropertyChangedBase
     {
-        public GameViewModel(CardViewModel currentCardViewModel, CardViewModel previewCardViewModel)
+        public GameViewModel(
+            IEventAggregator eventAggregator,
+            CardViewModel currentCardViewModel,
+            CardViewModel previewCardViewModel)
         {
+            _eventAggregator = eventAggregator;
             CurrentCardView = currentCardViewModel;
             PreviewCardView = previewCardViewModel;
+
             IsAnswerWrong = false;
             EventManager.RegisterClassHandler(typeof(Control), UIElement.KeyDownEvent, new RoutedEventHandler(KeyDown));
         }
 
-        public Game Game { get; set; }
+        private readonly IEventAggregator _eventAggregator;
+        public Deck Deck { get; set; }
         public CardViewModel CurrentCardView { get; private set; }
         public CardViewModel PreviewCardView { get; private set; }
 
@@ -42,7 +49,8 @@ namespace CodeConcussion.KVL.ViewModels
             if (CurrentCardView.IsCorrect)
             {
                 CurrentCardView.Card = PreviewCardView.Card;
-                PreviewCardView.Card = Game.Deck.Deal();
+                PreviewCardView.Card = Deck.Deal();
+                _eventAggregator.Publish(new CorrectAnswer(), x => x());
             }
             else
             {
@@ -69,9 +77,9 @@ namespace CodeConcussion.KVL.ViewModels
 
         public void Start()
         {
-            Game.Deck.Shuffle();
-            CurrentCardView.Card = Game.Deck.Deal();
-            PreviewCardView.Card = Game.Deck.Deal();
+            Deck.Shuffle();
+            CurrentCardView.Card = Deck.Deal();
+            PreviewCardView.Card = Deck.Deal();
         }
 
         private void KeyDown(object sender, RoutedEventArgs e)

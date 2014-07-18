@@ -4,11 +4,11 @@ namespace CodeConcussion.KVL.Messages
 {
     public sealed class StartGame
     {
-        public StartGame(Game game)
+        public StartGame(Deck deck)
         {
-            Game = game;
+            Deck = deck;
         }
 
-        public Game Game { get; set; }
+        public Deck Deck { get; set; }
     }
 }

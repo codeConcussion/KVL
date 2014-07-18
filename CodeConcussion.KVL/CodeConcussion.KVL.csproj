@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Messages\CorrectAnswer.cs" />
     <Compile Include="Messages\StartGame.cs" />
     <Compile Include="Messages\OpenRecords.cs" />
     <Compile Include="Messages\CloseRecords.cs" />
@@ -96,7 +97,6 @@
     <Compile Include="Utilities\DeckConfiguration.cs" />
     <Compile Include="Entities\Card.cs" />
     <Compile Include="Entities\Deck.cs" />
-    <Compile Include="Entities\Game.cs" />
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\Record.cs" />
     <Compile Include="Entities\Operation.cs" />
@@ -185,12 +185,11 @@
     </None>
     <AppDesigner Include="Properties\" />
     <Resource Include="Resources\lucon.ttf" />
+    <Resource Include="Resources\Start.png" />
+    <Resource Include="Resources\Stop.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Placeholder.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\User.png" />

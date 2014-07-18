@@ -1,6 +1,6 @@
 ﻿namespace CodeConcussion.KVL.Entities
 {
-    internal sealed class Record
+    public sealed class Record
     {
         public string Name { get; set; }
         public Operation Operation { get; set; }

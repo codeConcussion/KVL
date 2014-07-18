@@ -24,9 +24,9 @@ namespace CodeConcussion.KVL.ViewModels
             SettingsViewModel = settingsViewModel;
             RecordsViewModel = recordsViewModel;
             UserViewModel = userViewModel;
-            var decks = DeckConfiguration.Decks;
 
-            var user = UserStorage.LoadUser("toby");
+            Context.User = UserStorage.LoadUser("toby");
+
             //var user = new User("Toby");
             //user.Records.Add(new Record {Name = "One-Away", Operation = Operation.Addition, Seconds = 10m});
             //user.Records.Add(new Record {Name = "Whole Deck", Operation = Operation.Addition, Seconds = 20m});
@@ -43,7 +43,7 @@ namespace CodeConcussion.KVL.ViewModels
 
         public void Handle(StartGame message)
         {
-            GameViewModel.Game = message.Game;
+            GameViewModel.Deck = message.Deck;
             GameViewModel.Start();
         }
 
