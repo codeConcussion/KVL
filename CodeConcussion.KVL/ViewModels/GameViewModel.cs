@@ -16,6 +16,7 @@ namespace CodeConcussion.KVL.ViewModels
         {
             CurrentCardView = currentCardViewModel;
             PreviewCardView = previewCardViewModel;
+            IsAnswerWrong = false;
             EventManager.RegisterClassHandler(typeof(Control), UIElement.KeyDownEvent, new RoutedEventHandler(KeyDown));
         }
 
@@ -23,13 +24,21 @@ namespace CodeConcussion.KVL.ViewModels
         public CardViewModel CurrentCardView { get; private set; }
         public CardViewModel PreviewCardView { get; private set; }
 
+        private bool _isAnswerWrong;
         public bool IsAnswerWrong
         {
-            get { return !CurrentCardView.IsCorrect; }
+            get { return _isAnswerWrong; }
+            set
+            {
+                _isAnswerWrong = value;
+                NotifyOfPropertyChange(() => IsAnswerWrong);
+            }
         }
 
         public void Answer()
         {
+            IsAnswerWrong = false;
+
             if (CurrentCardView.IsCorrect)
             {
                 CurrentCardView.Card = PreviewCardView.Card;
@@ -37,10 +46,9 @@ namespace CodeConcussion.KVL.ViewModels
             }
             else
             {
-                //TODO:error animation
+                IsAnswerWrong = true;
             }
 
-            NotifyOfPropertyChange(() => IsAnswerWrong);
             Clear();
         }
 

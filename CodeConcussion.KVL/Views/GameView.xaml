@@ -11,7 +11,6 @@
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
         </ResourceDictionary>
-        
     </UserControl.Resources>
     
     <Grid ShowGridLines="True">
@@ -43,7 +42,8 @@
         <Label
             Style="{StaticResource WrongAnswer}"
             Visibility="{Binding IsAnswerWrong, Converter={StaticResource BooleanToVisibility}}"
-            Background="WhiteSmoke"
+            Background="Red"
+            Margin="16"
             Grid.Row="1"
             Grid.Column="1"
             Grid.RowSpan="2"
