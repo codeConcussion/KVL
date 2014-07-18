@@ -1,4 +1,4 @@
-﻿namespace CodeConcussion.KVL.Entity
+﻿namespace CodeConcussion.KVL.Entities
 {
     public enum Operation
     {

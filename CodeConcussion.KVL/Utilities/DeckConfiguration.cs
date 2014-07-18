@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using CodeConcussion.KVL.Entity;
+using CodeConcussion.KVL.Entities;
 using Newtonsoft.Json;
 
-namespace CodeConcussion.KVL.Utility
+namespace CodeConcussion.KVL.Utilities
 {
     internal static class DeckConfiguration
     {

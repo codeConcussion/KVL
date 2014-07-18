@@ -2,7 +2,7 @@
 using Caliburn.Micro.Autofac;
 using CodeConcussion.KVL.ViewModels;
 
-namespace CodeConcussion.KVL.Utility
+namespace CodeConcussion.KVL.Utilities
 {
     public class AppBootstrapper : AutofacBootstrapper<ShellViewModel>
     {

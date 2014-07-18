@@ -1,4 +1,4 @@
-﻿namespace CodeConcussion.KVL.Entity
+﻿namespace CodeConcussion.KVL.Entities
 {
     internal sealed class Group
     {

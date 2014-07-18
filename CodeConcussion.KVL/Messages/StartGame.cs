@@ -1,4 +1,4 @@
-﻿using CodeConcussion.KVL.Entity;
+﻿using CodeConcussion.KVL.Entities;
 
 namespace CodeConcussion.KVL.Messages
 {

@@ -1,7 +1,7 @@
 ﻿using System.Data.Odbc;
 using Caliburn.Micro;
 using CodeConcussion.KVL.Messages;
-using CodeConcussion.KVL.Utility;
+using CodeConcussion.KVL.Utilities;
 
 namespace CodeConcussion.KVL.ViewModels
 {

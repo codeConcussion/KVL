@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CodeConcussion.KVL.Entity
+namespace CodeConcussion.KVL.Entities
 {
     internal sealed class User
     {

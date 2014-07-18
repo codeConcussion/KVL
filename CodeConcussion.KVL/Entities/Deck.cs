@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CodeConcussion.KVL.Entity
+namespace CodeConcussion.KVL.Entities
 {
     public sealed class Deck
     {

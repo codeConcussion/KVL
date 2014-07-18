@@ -1,6 +1,6 @@
-﻿using CodeConcussion.KVL.Entity;
+﻿using CodeConcussion.KVL.Entities;
 
-namespace CodeConcussion.KVL.Utility
+namespace CodeConcussion.KVL.Utilities
 {
     internal static class Context
     {

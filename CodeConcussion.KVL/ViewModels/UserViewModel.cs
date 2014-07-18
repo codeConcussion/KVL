@@ -1,7 +1,7 @@
 ﻿using Caliburn.Micro;
-using CodeConcussion.KVL.Entity;
+using CodeConcussion.KVL.Entities;
 using CodeConcussion.KVL.Messages;
-using CodeConcussion.KVL.Utility;
+using CodeConcussion.KVL.Utilities;
 
 namespace CodeConcussion.KVL.ViewModels
 {

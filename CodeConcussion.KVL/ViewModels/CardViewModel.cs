@@ -1,7 +1,8 @@
 ﻿using System.Globalization;
+using System.Linq;
 using Caliburn.Micro;
-using CodeConcussion.KVL.Entity;
-using CodeConcussion.KVL.Utility;
+using CodeConcussion.KVL.Entities;
+using CodeConcussion.KVL.Utilities;
 
 namespace CodeConcussion.KVL.ViewModels
 {
@@ -54,8 +55,15 @@ namespace CodeConcussion.KVL.ViewModels
 
         public void AddDigit(int digit)
         {
-            var added = (Answer + digit).PadLeft(3);
-            Answer = added.Substring(added.Length - 3, 3);
+            var answer = Answer + digit;
+            if (answer.Length == 4) answer = answer.Remove(0, 1);
+            if (answer.All(x => x == '0')) answer = "0";
+            if (answer.Length > 1) answer = answer.TrimStart('0');
+            Answer = answer;
+
+            //var added = (Answer + digit).PadLeft(3);
+            //var answer = added.Substring(added.Length - 3, 3);
+            //Answer = answer;
         }
 
         public void RemoveDigit()

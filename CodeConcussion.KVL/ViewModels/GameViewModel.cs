@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 using Caliburn.Micro;
-using CodeConcussion.KVL.Entity;
+using CodeConcussion.KVL.Entities;
 using Control = System.Windows.Controls.Control;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 

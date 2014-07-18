@@ -83,22 +83,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Entity\User.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Messages\StartGame.cs" />
     <Compile Include="Messages\OpenRecords.cs" />
     <Compile Include="Messages\CloseRecords.cs" />
     <Compile Include="Messages\CloseUser.cs" />
     <Compile Include="Messages\OpenUser.cs" />
-    <Compile Include="Utility\Context.cs" />
-    <Compile Include="Utility\DeckConfiguration.cs" />
-    <Compile Include="Entity\Card.cs" />
-    <Compile Include="Entity\Deck.cs" />
-    <Compile Include="Entity\Game.cs" />
-    <Compile Include="Entity\Group.cs" />
-    <Compile Include="Entity\Record.cs" />
-    <Compile Include="Entity\Operation.cs" />
-    <Compile Include="Utility\Extensions.cs" />
-    <Compile Include="Utility\UserStorage.cs" />
+    <Compile Include="Utilities\Context.cs" />
+    <Compile Include="Utilities\DeckConfiguration.cs" />
+    <Compile Include="Entities\Card.cs" />
+    <Compile Include="Entities\Deck.cs" />
+    <Compile Include="Entities\Game.cs" />
+    <Compile Include="Entities\Group.cs" />
+    <Compile Include="Entities\Record.cs" />
+    <Compile Include="Entities\Operation.cs" />
+    <Compile Include="Utilities\Extensions.cs" />
+    <Compile Include="Utilities\UserStorage.cs" />
     <Compile Include="ViewModels\CardViewModel.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
@@ -127,7 +127,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Utility\AppBootstrapper.cs" />
+    <Compile Include="Utilities\AppBootstrapper.cs" />
     <Page Include="Resources\ResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

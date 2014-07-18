@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CodeConcussion.KVL.Entity
+namespace CodeConcussion.KVL.Entities
 {
     public sealed class Card
     {
