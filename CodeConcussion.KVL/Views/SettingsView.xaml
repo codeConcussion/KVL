@@ -7,10 +7,10 @@
     
     <StackPanel>
         <Button x:Name="OpenUser">
-            <Image Source="/Resources/Placeholder.png" />
+            <Image Source="/Resources/User.png" />
         </Button>
         <Button x:Name="OpenRecords">
-            <Image Source="/Resources/Placeholder.png" />
+            <Image Source="/Resources/Records.png" />
         </Button>
         <Button x:Name="StartGame">
             <Image Source="/Resources/Placeholder.png" />

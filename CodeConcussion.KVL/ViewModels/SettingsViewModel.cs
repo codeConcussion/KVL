@@ -8,6 +8,8 @@ namespace CodeConcussion.KVL.ViewModels
 {
     public sealed class SettingsViewModel : PropertyChangedBase
     {
+        //icons - https://www.iconfinder.com/iconsets/small-n-flat
+
         public SettingsViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;

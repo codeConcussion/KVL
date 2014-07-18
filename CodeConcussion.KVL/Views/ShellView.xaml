@@ -13,12 +13,12 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <ContentControl x:Name="SettingsViewModel" />
-        <ContentControl x:Name="GameViewModel" Grid.Column="1" />
+        <ContentControl x:Name="GameViewModel" />
+        <ContentControl x:Name="SettingsViewModel" Grid.Column="1" />
 
         <Border x:Name="IsRecordsActive" Style="{StaticResource FadeIn}" Grid.ColumnSpan="2">
             <Border.Background>

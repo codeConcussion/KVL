@@ -1,5 +1,4 @@
-﻿using System.Data.Odbc;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using CodeConcussion.KVL.Messages;
 using CodeConcussion.KVL.Utilities;
 
@@ -11,7 +10,8 @@ namespace CodeConcussion.KVL.ViewModels
         IHandle<CloseRecords>,
         IHandle<OpenUser>,
         IHandle<CloseUser>,
-        IHandle<StartGame>
+        IHandle<StartGame>,
+        IHaveDisplayName
     {
         public ShellViewModel(
             GameViewModel gameViewModel,
@@ -19,6 +19,7 @@ namespace CodeConcussion.KVL.ViewModels
             UserViewModel userViewModel,
             RecordsViewModel recordsViewModel)
         {
+            DisplayName = "KVL";
             GameViewModel = gameViewModel;
             SettingsViewModel = settingsViewModel;
             RecordsViewModel = recordsViewModel;
@@ -32,6 +33,7 @@ namespace CodeConcussion.KVL.ViewModels
             //UserStorage.SaveUser(user);
         }
 
+        public string DisplayName { get; set; }
         public GameViewModel GameViewModel { get; private set; }
         public SettingsViewModel SettingsViewModel { get; private set; }
         public RecordsViewModel RecordsViewModel { get; private set; }

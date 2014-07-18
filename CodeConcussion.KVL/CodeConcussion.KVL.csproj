@@ -40,6 +40,9 @@
     <StartupObject>
     </StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\KVL.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
@@ -188,6 +191,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\User.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Records.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\KVL.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
