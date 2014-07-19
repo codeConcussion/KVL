@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodeConcussion.KVL.Entities;
 
-namespace CodeConcussion.KVL.Utilities
+namespace CodeConcussion.KVL.Utilities.Game
 {
     public static class Context
     {

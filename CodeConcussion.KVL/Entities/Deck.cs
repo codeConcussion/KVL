@@ -13,10 +13,14 @@ namespace CodeConcussion.KVL.Entities
         public Card CurrentCard { get; set; }
         public List<Card> Cards { get; set; }
 
+        public bool HasCurrentCard { get { return CurrentCard != null; } }
+        public bool IsLastCard { get { return CurrentCard == Cards.Last(); } }
+        public bool IsNextToLastCard { get { return CurrentCard == Cards[Cards.Count - 2]; } }
+
         public Card Deal()
         {
-            if (CurrentCard == null) return (CurrentCard = Cards[0]);
-            if (CurrentCard == Cards.Last()) return (CurrentCard = null);
+            if (!HasCurrentCard) return (CurrentCard = Cards[0]);
+            if (IsLastCard) return (CurrentCard = null);
 
             var index = Cards.IndexOf(CurrentCard);
             return (CurrentCard = Cards[index + 1]);

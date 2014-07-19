@@ -2,13 +2,13 @@
     x:Class="CodeConcussion.KVL.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:utility="clr-namespace:CodeConcussion.KVL.Utilities">
+    xmlns:container="clr-namespace:CodeConcussion.KVL.Utilities.Container">
     
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
-                    <utility:ContainerBootstrapper x:Key="ContainerBootstrapper" />
+                    <container:ContainerBootstrapper x:Key="ContainerBootstrapper" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

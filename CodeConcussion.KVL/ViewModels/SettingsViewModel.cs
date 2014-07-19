@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Threading;
 using CodeConcussion.KVL.Entities;
 using CodeConcussion.KVL.Messages;
-using CodeConcussion.KVL.Utilities;
+using CodeConcussion.KVL.Utilities.Game;
 
 namespace CodeConcussion.KVL.ViewModels
 {

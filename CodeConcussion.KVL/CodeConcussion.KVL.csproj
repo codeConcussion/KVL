@@ -86,16 +86,18 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Messages\GameMessage.cs" />
     <Compile Include="Messages\MessageType.cs" />
-    <Compile Include="Utilities\ContainerBootstrapper.cs" />
-    <Compile Include="Utilities\Context.cs" />
-    <Compile Include="Utilities\DeckConfiguration.cs" />
+    <Compile Include="Utilities\Container\AutoSubscriptionModule.cs" />
+    <Compile Include="Utilities\Container\ContainerBootstrapper.cs" />
+    <Compile Include="Utilities\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Utilities\Game\Context.cs" />
+    <Compile Include="Utilities\Game\DeckConfiguration.cs" />
     <Compile Include="Entities\Card.cs" />
     <Compile Include="Entities\Deck.cs" />
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\Record.cs" />
     <Compile Include="Entities\Operation.cs" />
     <Compile Include="Utilities\Extensions.cs" />
-    <Compile Include="Utilities\UserStorage.cs" />
+    <Compile Include="Utilities\Game\UserStorage.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CardViewModel.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
@@ -194,6 +196,7 @@
   <ItemGroup>
     <Resource Include="Resources\KVL.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

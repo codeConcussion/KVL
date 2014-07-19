@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using CodeConcussion.KVL.Entities;
 using CodeConcussion.KVL.Messages;
 using Control = System.Windows.Controls.Control;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
-
 
 namespace CodeConcussion.KVL.ViewModels
 {
@@ -20,9 +20,33 @@ namespace CodeConcussion.KVL.ViewModels
             EventManager.RegisterClassHandler(typeof(Control), UIElement.KeyDownEvent, new RoutedEventHandler(KeyDown));
         }
 
-        public CardViewModel CurrentCardView { get; set; }
-        public CardViewModel PreviewCardView { get; set; }
+        public CardViewModel CurrentCardView { get; private set; }
+        public CardViewModel PreviewCardView { get; private set; }
         public Deck Deck { get; set; }
+
+        private bool _hasCurrentCard;
+        public bool HasCurrentCard
+        {
+            get { return _hasCurrentCard; }
+            set
+            {
+                if (_hasCurrentCard == value) return;
+                _hasCurrentCard = value;
+                NotifyOfPropertyChange(() => HasCurrentCard);
+            }
+        }
+
+        private bool _hasPreviousCard;
+        public bool HasPreviewCard
+        {
+            get { return _hasPreviousCard; }
+            set
+            {
+                if (_hasPreviousCard == value) return;
+                _hasPreviousCard = value;
+                NotifyOfPropertyChange(() => HasPreviewCard);
+            }
+        }
 
         private bool _isAnswerWrong;
         public bool IsAnswerWrong
@@ -35,27 +59,33 @@ namespace CodeConcussion.KVL.ViewModels
             }
         }
 
-        public void Answer()
+        public void Start()
         {
-            IsAnswerWrong = false;
-
-            if (CurrentCardView.IsCorrect)
-            {
-                CurrentCardView.Card = PreviewCardView.Card;
-                PreviewCardView.Card = Deck.Deal();
-                PublishMessage(MessageType.CorrectAnswer);
-            }
-            else
-            {
-                IsAnswerWrong = true;
-            }
-
-            Clear();
+            Deck.Shuffle();
+            CurrentCardView.Card = Deck.Deal();
+            PreviewCardView.Card = Deck.Deal();
+            HasCurrentCard = HasPreviewCard = true;
         }
 
         private void AddDigit(int digit)
         {
             CurrentCardView.AddDigit(digit);
+        }
+
+        private void Answer()
+        {
+            IsAnswerWrong = false;
+            IsAnswerWrong = !CurrentCardView.IsCorrect;
+            Clear();
+
+            if (!IsAnswerWrong)
+            {
+                HasCurrentCard = !Deck.IsLastCard;
+                HasPreviewCard = !Deck.IsNextToLastCard && !Deck.IsLastCard;
+                CurrentCardView.Card = PreviewCardView.Card;
+                PreviewCardView.Card = Deck.Deal();
+                PublishMessage(MessageType.CorrectAnswer);
+            }
         }
 
         private void Clear()
@@ -66,13 +96,6 @@ namespace CodeConcussion.KVL.ViewModels
         private void Delete()
         {
             CurrentCardView.RemoveDigit();
-        }
-
-        public void Start()
-        {
-            Deck.Shuffle();
-            CurrentCardView.Card = Deck.Deal();
-            PreviewCardView.Card = Deck.Deal();
         }
 
         private void KeyDown(object sender, RoutedEventArgs e)

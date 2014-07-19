@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using Autofac;
-using Autofac.Core;
 using Caliburn.Micro;
 using CodeConcussion.KVL.ViewModels;
 
-namespace CodeConcussion.KVL.Utilities
+namespace CodeConcussion.KVL.Utilities.Container
 {
     ///modeled after https://github.com/brendankowitz/Caliburn.Micro.Autofac
     public sealed class ContainerBootstrapper : BootstrapperBase
@@ -49,7 +48,7 @@ namespace CodeConcussion.KVL.Utilities
 
             //event aggregator
             builder.Register<IEventAggregator>(x => new EventAggregator()).InstancePerLifetimeScope();
-            builder.RegisterModule<EventAggregationAutoSubscriptionModule>();
+            builder.RegisterModule<AutoSubscriptionModule>();
 
             _container = builder.Build();
         }
@@ -79,10 +78,12 @@ namespace CodeConcussion.KVL.Utilities
             DisplayRootViewFor<ShellViewModel>();
 
             Application.Current.MainWindow.SizeToContent = SizeToContent.Manual;
-            Application.Current.MainWindow.Width = (SystemParameters.PrimaryScreenWidth * .75);
-            Application.Current.MainWindow.Height = (SystemParameters.PrimaryScreenHeight * .75);
-            Application.Current.MainWindow.Left = (SystemParameters.PrimaryScreenWidth * .125);
-            Application.Current.MainWindow.Top = (SystemParameters.PrimaryScreenHeight * .125);
+            //Application.Current.MainWindow.Width = (SystemParameters.PrimaryScreenWidth * .75);
+            //Application.Current.MainWindow.Height = (SystemParameters.PrimaryScreenHeight * .75);
+            //Application.Current.MainWindow.Left = (SystemParameters.PrimaryScreenWidth * .125);
+            //Application.Current.MainWindow.Top = (SystemParameters.PrimaryScreenHeight * .125);
+            Application.Current.MainWindow.Width = 1024;
+            Application.Current.MainWindow.Height = 768;
             Application.Current.MainWindow.MinWidth = 458;
             Application.Current.MainWindow.MinHeight = 334;
         }
@@ -90,21 +91,6 @@ namespace CodeConcussion.KVL.Utilities
         public static T Resolve<T>()
         {
             return _container.Resolve<T>();
-        }
-    }
-
-    public class EventAggregationAutoSubscriptionModule : Module
-    {
-        protected override void AttachToComponentRegistration(IComponentRegistry registry, IComponentRegistration registration)
-        {
-            registration.Activated += OnComponentActivated;
-        }
-
-        private static void OnComponentActivated(object sender, ActivatedEventArgs<object> e)
-        {
-            if (e == null) return;
-            var handler = e.Instance as IHandle;
-            if (handler != null) e.Context.Resolve<IEventAggregator>().Subscribe(handler);
         }
     }
 }

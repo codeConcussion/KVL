@@ -5,7 +5,7 @@ using System.Text;
 using CodeConcussion.KVL.Entities;
 using Newtonsoft.Json;
 
-namespace CodeConcussion.KVL.Utilities
+namespace CodeConcussion.KVL.Utilities.Game
 {
     internal static class UserStorage
     {
