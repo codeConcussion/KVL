@@ -1,36 +1,24 @@
-﻿using Caliburn.Micro;
+﻿using System.Collections.Generic;
+using Caliburn.Micro;
 using CodeConcussion.KVL.Messages;
 using CodeConcussion.KVL.Utilities;
 
 namespace CodeConcussion.KVL.ViewModels
 {
-    public sealed class ShellViewModel :
-        PropertyChangedBase,
-        IHandle<OpenRecords>,
-        IHandle<CloseRecords>,
-        IHandle<OpenUser>,
-        IHandle<CloseUser>,
-        IHandle<StartGame>,
-        IHaveDisplayName
+    public sealed class ShellViewModel : BaseViewModel, IHaveDisplayName
     {
         public ShellViewModel(
             GameViewModel gameViewModel,
             SettingsViewModel settingsViewModel,
-            UserViewModel userViewModel,
-            RecordsViewModel recordsViewModel)
+            RecordsViewModel recordsViewModel,
+            UserViewModel userViewModel)
         {
             DisplayName = "KVL";
             GameViewModel = gameViewModel;
             SettingsViewModel = settingsViewModel;
             RecordsViewModel = recordsViewModel;
             UserViewModel = userViewModel;
-
             Context.User = UserStorage.LoadUser("toby");
-
-            //var user = new User("Toby");
-            //user.Records.Add(new Record {Name = "One-Away", Operation = Operation.Addition, Seconds = 10m});
-            //user.Records.Add(new Record {Name = "Whole Deck", Operation = Operation.Addition, Seconds = 20m});
-            //UserStorage.SaveUser(user);
         }
 
         public string DisplayName { get; set; }
@@ -39,18 +27,12 @@ namespace CodeConcussion.KVL.ViewModels
         public RecordsViewModel RecordsViewModel { get; private set; }
         public UserViewModel UserViewModel { get; private set; }
 
-        #region Game
-
-        public void Handle(StartGame message)
+        public void StartGame()
         {
-            GameViewModel.Deck = message.Deck;
+            GameViewModel.Deck = Context.CurrentDeck;
             GameViewModel.Start();
         }
-
-        #endregion
-
-        #region Records
-
+        
         private bool _isRecordsActive;
         public bool IsRecordsActive
         {
@@ -62,13 +44,6 @@ namespace CodeConcussion.KVL.ViewModels
                 NotifyOfPropertyChange(() => IsRecordsActive);
             }
         }
-
-        public void Handle(OpenRecords message) { IsRecordsActive = true; }
-        public void Handle(CloseRecords message) { IsRecordsActive = false; }
-
-        #endregion
-
-        #region User
 
         private bool _isUserActive;
         public bool IsUserActive
@@ -82,9 +57,13 @@ namespace CodeConcussion.KVL.ViewModels
             }
         }
 
-        public void Handle(OpenUser message) { IsUserActive = true; }
-        public void Handle(CloseUser message) { IsUserActive = false; }
-
-        #endregion
+        protected override void AddMessageHandlers(Dictionary<MessageType, System.Action> map)
+        {
+            map.Add(MessageType.CloseRecords, () => IsRecordsActive = false);
+            map.Add(MessageType.OpenRecords, () => IsRecordsActive = true);
+            map.Add(MessageType.CloseUser, () => IsUserActive = false);
+            map.Add(MessageType.OpenUser, () => IsUserActive = true);
+            map.Add(MessageType.StartGame, StartGame);
+        }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using Caliburn.Micro;
 using CodeConcussion.KVL.Entities;
 using CodeConcussion.KVL.Messages;
 using Control = System.Windows.Controls.Control;
@@ -11,25 +10,19 @@ using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace CodeConcussion.KVL.ViewModels
 {
-    public sealed class GameViewModel : PropertyChangedBase
+    public sealed class GameViewModel : BaseViewModel
     {
-        public GameViewModel(
-            IEventAggregator eventAggregator,
-            CardViewModel currentCardViewModel,
-            CardViewModel previewCardViewModel)
+        public GameViewModel(CardViewModel currentCardViewModel, CardViewModel previewCardViewModel)
         {
-            _eventAggregator = eventAggregator;
             CurrentCardView = currentCardViewModel;
             PreviewCardView = previewCardViewModel;
-
             IsAnswerWrong = false;
             EventManager.RegisterClassHandler(typeof(Control), UIElement.KeyDownEvent, new RoutedEventHandler(KeyDown));
         }
 
-        private readonly IEventAggregator _eventAggregator;
+        public CardViewModel CurrentCardView { get; set; }
+        public CardViewModel PreviewCardView { get; set; }
         public Deck Deck { get; set; }
-        public CardViewModel CurrentCardView { get; private set; }
-        public CardViewModel PreviewCardView { get; private set; }
 
         private bool _isAnswerWrong;
         public bool IsAnswerWrong
@@ -50,7 +43,7 @@ namespace CodeConcussion.KVL.ViewModels
             {
                 CurrentCardView.Card = PreviewCardView.Card;
                 PreviewCardView.Card = Deck.Deal();
-                _eventAggregator.Publish(new CorrectAnswer(), x => x());
+                PublishMessage(MessageType.CorrectAnswer);
             }
             else
             {
@@ -88,13 +81,13 @@ namespace CodeConcussion.KVL.ViewModels
             if (args == null) return;
 
             args.Handled = true;
-            var isAction = ActionMap.ContainsKey(args.Key);
-            if (isAction) ActionMap[args.Key](this);
+            var isAction = KeyMap.ContainsKey(args.Key);
+            if (isAction) KeyMap[args.Key](this);
         }
 
-        #region Action Map
+        #region Key Map
 
-        private static readonly Dictionary<Key, Action<GameViewModel>> ActionMap = new Dictionary<Key, Action<GameViewModel>>
+        private static readonly Dictionary<Key, Action<GameViewModel>> KeyMap = new Dictionary<Key, Action<GameViewModel>>
         {
             { Key.Escape, x => x.Clear() },
             { Key.Back, x => x.Delete() },

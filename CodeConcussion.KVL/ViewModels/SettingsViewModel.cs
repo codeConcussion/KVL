@@ -1,26 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Threading;
-using Caliburn.Micro;
 using CodeConcussion.KVL.Entities;
 using CodeConcussion.KVL.Messages;
 using CodeConcussion.KVL.Utilities;
 
 namespace CodeConcussion.KVL.ViewModels
 {
-    public sealed class SettingsViewModel : PropertyChangedBase, IHandle<CorrectAnswer>
+    public sealed class SettingsViewModel : BaseViewModel
     {
         //icons - https://www.iconfinder.com/iconsets/small-n-flat
 
-        public SettingsViewModel(IEventAggregator eventAggregator)
+        public SettingsViewModel()
         {
-            _eventAggregator = eventAggregator;
             _timer.Tick += (x, y) => NotifyOfPropertyChange(() => Timing);
         }
 
-        private readonly IEventAggregator _eventAggregator;
         private readonly DispatcherTimer _timer = new DispatcherTimer();
         private Operation _operation = Operation.Addition;
         private int _progress = 1;
@@ -76,7 +73,11 @@ namespace CodeConcussion.KVL.ViewModels
 
         public string Progress
         {
-            get { return string.Format("{0} of {1}", _progress, SelectedDeck.Cards.Count); }
+            get
+            {
+                if (SelectedDeck == null) return "";
+                return string.Format("{0} of {1}", _progress, SelectedDeck.Cards.Count);
+            }
         }
 
         public string Timing
@@ -94,17 +95,18 @@ namespace CodeConcussion.KVL.ViewModels
 
         public void OpenUser()
         {
-            _eventAggregator.Publish(new OpenUser(), x => x());
+            PublishMessage(MessageType.OpenUser);
         }
 
         public void OpenRecords()
         {
-            _eventAggregator.Publish(new OpenRecords(), x => x());
+            PublishMessage(MessageType.OpenRecords);
         }
 
         public void StartGame()
         {
-            _eventAggregator.Publish(new StartGame(SelectedDeck), x => x());
+            Context.CurrentDeck = SelectedDeck;
+            PublishMessage(MessageType.StartGame);
             StartTimer();
             UpdateProgress(1);
         }
@@ -121,12 +123,21 @@ namespace CodeConcussion.KVL.ViewModels
             _timer.Start();
         }
 
-        private void UpdateProgress(int progress)
+        public void IncrementProgress()
+        {
+            _progress++;
+            NotifyOfPropertyChange(() => Progress);
+        }
+
+        public void UpdateProgress(int progress)
         {
             _progress = progress;
             NotifyOfPropertyChange(() => Progress);
         }
 
-        public void Handle(CorrectAnswer message) { UpdateProgress(_progress + 1); }
+        protected override void AddMessageHandlers(Dictionary<MessageType, Action> map)
+        {
+            map.Add(MessageType.CorrectAnswer, IncrementProgress);
+        }
     }
 }

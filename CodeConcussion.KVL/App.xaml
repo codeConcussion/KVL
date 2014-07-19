@@ -8,7 +8,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
-                    <utility:AppBootstrapper x:Key="AppBootstrapper" />
+                    <utility:ContainerBootstrapper x:Key="ContainerBootstrapper" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

@@ -51,9 +51,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Caliburn.Micro.Core.2.0.0\lib\net40\Caliburn.Micro.dll</HintPath>
     </Reference>
-    <Reference Include="Caliburn.Micro.Autofac">
-      <HintPath>..\packages\Caliburn.Micro.AutofacBootstrap.2.0.3\lib\net40\Caliburn.Micro.Autofac.dll</HintPath>
-    </Reference>
     <Reference Include="Caliburn.Micro.Platform, Version=2.0.0.6, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Caliburn.Micro.2.0.0\lib\net40\Caliburn.Micro.Platform.dll</HintPath>
@@ -87,12 +84,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Messages\CorrectAnswer.cs" />
-    <Compile Include="Messages\StartGame.cs" />
-    <Compile Include="Messages\OpenRecords.cs" />
-    <Compile Include="Messages\CloseRecords.cs" />
-    <Compile Include="Messages\CloseUser.cs" />
-    <Compile Include="Messages\OpenUser.cs" />
+    <Compile Include="Messages\GameMessage.cs" />
+    <Compile Include="Messages\MessageType.cs" />
+    <Compile Include="Utilities\ContainerBootstrapper.cs" />
     <Compile Include="Utilities\Context.cs" />
     <Compile Include="Utilities\DeckConfiguration.cs" />
     <Compile Include="Entities\Card.cs" />
@@ -102,6 +96,7 @@
     <Compile Include="Entities\Operation.cs" />
     <Compile Include="Utilities\Extensions.cs" />
     <Compile Include="Utilities\UserStorage.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CardViewModel.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
@@ -130,7 +125,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Utilities\AppBootstrapper.cs" />
     <Page Include="Resources\ResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

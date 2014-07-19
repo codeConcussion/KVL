@@ -1,12 +1,11 @@
 ﻿using System.Globalization;
 using System.Linq;
-using Caliburn.Micro;
 using CodeConcussion.KVL.Entities;
 using CodeConcussion.KVL.Utilities;
 
 namespace CodeConcussion.KVL.ViewModels
 {
-    public sealed class CardViewModel : PropertyChangedBase
+    public sealed class CardViewModel : BaseViewModel
     {
         private Card _card;
         public Card Card
