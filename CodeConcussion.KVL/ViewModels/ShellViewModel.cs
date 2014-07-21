@@ -27,12 +27,6 @@ namespace CodeConcussion.KVL.ViewModels
         public RecordsViewModel RecordsViewModel { get; private set; }
         public UserViewModel UserViewModel { get; private set; }
 
-        public void StartGame()
-        {
-            GameViewModel.Deck = Context.CurrentDeck;
-            GameViewModel.Start();
-        }
-        
         private bool _isRecordsActive;
         public bool IsRecordsActive
         {
@@ -57,13 +51,12 @@ namespace CodeConcussion.KVL.ViewModels
             }
         }
 
-        protected override void AddMessageHandlers(Dictionary<MessageType, System.Action> map)
+        protected override void AddMessageHandlers(Dictionary<MessageType, System.Action<dynamic>> map)
         {
-            map.Add(MessageType.CloseRecords, () => IsRecordsActive = false);
-            map.Add(MessageType.OpenRecords, () => IsRecordsActive = true);
-            map.Add(MessageType.CloseUser, () => IsUserActive = false);
-            map.Add(MessageType.OpenUser, () => IsUserActive = true);
-            map.Add(MessageType.StartGame, StartGame);
+            map.Add(MessageType.CloseRecords, x => IsRecordsActive = false);
+            map.Add(MessageType.OpenRecords, x => IsRecordsActive = true);
+            map.Add(MessageType.CloseUser, x => IsUserActive = false);
+            map.Add(MessageType.OpenUser, x => IsUserActive = true);
         }
     }
 }

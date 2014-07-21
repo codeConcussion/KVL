@@ -84,7 +84,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Messages\GameMessage.cs" />
+    <Compile Include="Messages\ViewModelMessage.cs" />
     <Compile Include="Messages\MessageType.cs" />
     <Compile Include="Utilities\Container\AutoSubscriptionModule.cs" />
     <Compile Include="Utilities\Container\ContainerBootstrapper.cs" />

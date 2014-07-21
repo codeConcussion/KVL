@@ -60,8 +60,9 @@ namespace CodeConcussion.KVL.ViewModels
             }
         }
 
-        public void Start()
+        private void Start(Deck deck)
         {
+            Deck = deck;
             Deck.Shuffle();
             CurrentCardView.Card = Deck.Deal();
             PreviewCardView.Card = Deck.Deal();
@@ -89,9 +90,7 @@ namespace CodeConcussion.KVL.ViewModels
             }
             else
             {
-                Context.CorrectAnswer();
-                PublishMessage(MessageType.CorrectAnswer);
-
+                PublishMessage(MessageType.CorrectAnswer, CurrentCardView.Card);
                 CurrentCardView.Card = PreviewCardView.Card;
                 PreviewCardView.Card = Deck.Deal();
             }
@@ -115,6 +114,11 @@ namespace CodeConcussion.KVL.ViewModels
             args.Handled = true;
             var isAction = KeyMap.ContainsKey(args.Key);
             if (isAction) KeyMap[args.Key](this);
+        }
+
+        protected override void AddMessageHandlers(Dictionary<MessageType, Action<dynamic>> map)
+        {
+            map.Add(MessageType.StartGame, x => Start(x));
         }
 
         #region Key Map
