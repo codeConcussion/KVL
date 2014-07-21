@@ -14,10 +14,10 @@
             Seconds = seconds;
         }
 
-        public string Key { get; private set; }
-        public string Description { get; private set; }
-        public Operation Operation { get; private set; }
-        public int Order { get; private set; }
-        public decimal Seconds { get; private set; }
+        public string Key { get; set; }
+        public string Description { get; set; }
+        public Operation Operation { get; set; }
+        public int Order { get; set; }
+        public decimal Seconds { get; set; }
     }
 }

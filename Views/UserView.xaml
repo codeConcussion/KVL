@@ -6,7 +6,7 @@
     Width="250"
     Height="56">
 
-    <StackPanel Orientation="Horizontal" Margin="16">
+    <StackPanel Orientation="Horizontal" Margin="8 16">
         <Label
             Content="_User"
             Target="User"
@@ -24,10 +24,9 @@
         <Button
             x:Name="Close"
             Content="OK"
-            Width="40"
+            Width="56"
             Height="24"
             Margin="4 0"
             VerticalAlignment="Top" />
     </StackPanel>
-    <!--</StackPanel>-->
 </UserControl>

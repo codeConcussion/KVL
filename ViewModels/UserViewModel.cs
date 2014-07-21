@@ -1,5 +1,4 @@
-﻿using CodeConcussion.KVL.Entities;
-using CodeConcussion.KVL.Messages;
+﻿using CodeConcussion.KVL.Messages;
 using CodeConcussion.KVL.Utilities.Game;
 
 namespace CodeConcussion.KVL.ViewModels
@@ -12,10 +11,7 @@ namespace CodeConcussion.KVL.ViewModels
         {
             if (string.IsNullOrWhiteSpace(User)) return;
 
-            var user = new User(User);
-            //TODO:load records
-            Context.User = user;
-
+            Context.User = UserStorage.LoadUser(User);
             PublishMessage(MessageType.CloseUser);
         }
     }

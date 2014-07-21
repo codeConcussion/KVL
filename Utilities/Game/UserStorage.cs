@@ -12,6 +12,8 @@ namespace CodeConcussion.KVL.Utilities.Game
         public static User LoadUser(string userName)
         {
             var file = GetUserFile(userName);
+            if (!File.Exists(file)) return new User(userName);
+
             var serialized = File.ReadAllText(file);
             var decoded = Convert.FromBase64String(serialized);
             var json = Encoding.ASCII.GetString(decoded);

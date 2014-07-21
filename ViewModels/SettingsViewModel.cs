@@ -140,6 +140,8 @@ namespace CodeConcussion.KVL.ViewModels
             var seconds = decimal.Round((decimal)time.TotalSeconds, 1, MidpointRounding.AwayFromZero);
             var record = new Record(SelectedDeck, seconds);
             var isNewRecord = Context.User.UpdateRecord(record);
+            if (isNewRecord) UserStorage.SaveUser(Context.User);
+
             var type = isNewRecord ? MessageType.NewRecord : MessageType.NoRecord;
             PublishMessage(type, record);
         }
