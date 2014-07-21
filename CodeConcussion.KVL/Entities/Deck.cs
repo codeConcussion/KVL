@@ -13,9 +13,9 @@ namespace CodeConcussion.KVL.Entities
         public Card CurrentCard { get; set; }
         public List<Card> Cards { get; set; }
 
+        public int CurrentIndex { get { return Cards.IndexOf(CurrentCard); } }
         public bool HasCurrentCard { get { return CurrentCard != null; } }
         public bool IsLastCard { get { return CurrentCard == Cards.Last(); } }
-        public bool IsNextToLastCard { get { return CurrentCard == Cards[Cards.Count - 2]; } }
 
         public Card Deal()
         {
@@ -30,6 +30,7 @@ namespace CodeConcussion.KVL.Entities
         {
             var random = new Random();
             Cards = Cards.OrderBy(x => random.Next()).ToList();
+            CurrentCard = null;
         }
     }
 }

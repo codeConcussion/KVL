@@ -5,6 +5,7 @@
         CloseRecords,
         CloseUser,
         CorrectAnswer,
+        FinishGame,
         OpenRecords,
         OpenUser,
         StartGame

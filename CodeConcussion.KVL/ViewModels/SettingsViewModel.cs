@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Threading;
 using CodeConcussion.KVL.Entities;
 using CodeConcussion.KVL.Messages;
@@ -14,13 +15,13 @@ namespace CodeConcussion.KVL.ViewModels
 
         public SettingsViewModel()
         {
+            _timer.Interval = TimeSpan.FromMilliseconds(100);
             _timer.Tick += (x, y) => NotifyOfPropertyChange(() => Timing);
         }
 
         private readonly DispatcherTimer _timer = new DispatcherTimer();
         private Operation _operation = Operation.Addition;
-        private int _progress = 1;
-        private DateTime _started;
+        private DateTime? _started;
         
         public bool IsAddition
         {
@@ -75,7 +76,8 @@ namespace CodeConcussion.KVL.ViewModels
             get
             {
                 if (SelectedDeck == null) return "";
-                return string.Format("{0} of {1}", _progress, SelectedDeck.Cards.Count);
+                if (!_started.HasValue) return "";
+                return string.Format("{0} of {1}", Context.CurrentCount, Context.CurrentDeck.Cards.Count);
             }
         }
 
@@ -83,12 +85,12 @@ namespace CodeConcussion.KVL.ViewModels
         {
             get
             {
-                var delta = DateTime.Now - _started;
+                if (!_started.HasValue) return "";
+                var delta = DateTime.Now - _started.Value;
                 var minutes = delta.Minutes.ToString("D2");
                 var seconds = delta.Seconds.ToString("D2");
                 var tenths = (delta.Milliseconds / 100).ToString("D1");
                 return string.Format("{0}:{1}.{2}", minutes, seconds, tenths);
-                //return string.Format("{0}:{1}", delta.Minutes.ToString("D2"), delta.Seconds.ToString("D2"));
             }
         }
 
@@ -104,39 +106,33 @@ namespace CodeConcussion.KVL.ViewModels
 
         public void StartGame()
         {
-            Context.CurrentDeck = SelectedDeck;
+            _started = DateTime.Now;
+            _timer.Start();
+
+            Context.StartGame(SelectedDeck);
             PublishMessage(MessageType.StartGame);
-            StartTimer();
-            UpdateProgress(1);
+            NotifyOfPropertyChange(() => Progress);
         }
 
         public void StopGame()
         {
-            //TODO:finish
-        }
+            _started = null;
+            _timer.Stop();
 
-        private void StartTimer()
-        {
-            _started = DateTime.Now;
-            _timer.Interval = TimeSpan.FromMilliseconds(100);
-            _timer.Start();
-        }
-
-        public void IncrementProgress()
-        {
-            _progress++;
             NotifyOfPropertyChange(() => Progress);
+            NotifyOfPropertyChange(() => Timing);
         }
 
-        public void UpdateProgress(int progress)
+        private void FinishGame()
         {
-            _progress = progress;
-            NotifyOfPropertyChange(() => Progress);
+            StopGame();
+            //TODO:records
         }
 
         protected override void AddMessageHandlers(Dictionary<MessageType, Action> map)
         {
-            map.Add(MessageType.CorrectAnswer, IncrementProgress);
+            map.Add(MessageType.CorrectAnswer, () => NotifyOfPropertyChange(() => Progress));
+            map.Add(MessageType.FinishGame, FinishGame);
         }
     }
 }

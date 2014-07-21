@@ -5,6 +5,7 @@ using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using CodeConcussion.KVL.Entities;
 using CodeConcussion.KVL.Messages;
+using CodeConcussion.KVL.Utilities.Game;
 using Control = System.Windows.Controls.Control;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
@@ -77,14 +78,22 @@ namespace CodeConcussion.KVL.ViewModels
             IsAnswerWrong = false;
             IsAnswerWrong = !CurrentCardView.IsCorrect;
             Clear();
+            if (IsAnswerWrong) return;
 
-            if (!IsAnswerWrong)
+            HasCurrentCard = HasPreviewCard;
+            HasPreviewCard = !Deck.IsLastCard && HasCurrentCard;
+            var isFinished = !HasCurrentCard;
+            if (isFinished)
             {
-                HasCurrentCard = !Deck.IsLastCard;
-                HasPreviewCard = !Deck.IsNextToLastCard && !Deck.IsLastCard;
+                PublishMessage(MessageType.FinishGame);
+            }
+            else
+            {
+                Context.CorrectAnswer();
+                PublishMessage(MessageType.CorrectAnswer);
+
                 CurrentCardView.Card = PreviewCardView.Card;
                 PreviewCardView.Card = Deck.Deal();
-                PublishMessage(MessageType.CorrectAnswer);
             }
         }
 
