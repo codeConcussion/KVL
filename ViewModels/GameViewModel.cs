@@ -58,15 +58,6 @@ namespace CodeConcussion.KVL.ViewModels
             }
         }
 
-        private void Start(Deck deck)
-        {
-            Deck = deck;
-            Deck.Shuffle();
-            CurrentCardView.Card = Deck.Deal();
-            PreviewCardView.Card = Deck.Deal();
-            HasCurrentCard = HasPreviewCard = true;
-        }
-
         private void AddDigit(int digit)
         {
             CurrentCardView.AddDigit(digit);
@@ -81,14 +72,12 @@ namespace CodeConcussion.KVL.ViewModels
 
             HasCurrentCard = HasPreviewCard;
             HasPreviewCard = !Deck.IsLastCard && HasCurrentCard;
-            var isFinished = !HasCurrentCard;
-            if (isFinished)
+            
+            var type = HasCurrentCard ? MessageType.CorrectAnswer : MessageType.FinishGame;
+            PublishMessage(type, CurrentCardView.Card);
+
+            if (HasCurrentCard)
             {
-                PublishMessage(MessageType.FinishGame);
-            }
-            else
-            {
-                PublishMessage(MessageType.CorrectAnswer, CurrentCardView.Card);
                 CurrentCardView.Card = PreviewCardView.Card;
                 PreviewCardView.Card = Deck.Deal();
             }
@@ -114,9 +103,23 @@ namespace CodeConcussion.KVL.ViewModels
             if (isAction) KeyMap[args.Key](this);
         }
 
+        private void Start(Deck deck)
+        {
+            Deck = deck;
+            Deck.Shuffle();
+            CurrentCardView.Card = Deck.Deal();
+            PreviewCardView.Card = Deck.Deal();
+            HasCurrentCard = HasPreviewCard = true;
+        }
+
+        private void Stop()
+        {
+            HasCurrentCard = HasPreviewCard = false;
+        }
         protected override void AddMessageHandlers(Dictionary<MessageType, Action<dynamic>> map)
         {
             map.Add(MessageType.StartGame, x => Start(x));
+            map.Add(MessageType.StopGame, x => Stop());
         }
 
         #region Key Map

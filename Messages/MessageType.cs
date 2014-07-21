@@ -11,6 +11,7 @@
         NoRecord,
         OpenRecords,
         OpenUser,
-        StartGame
+        StartGame,
+        StopGame
     }
 }

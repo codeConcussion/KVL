@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Windows;
 using System.Windows.Threading;
 using CodeConcussion.KVL.Entities;
 using CodeConcussion.KVL.Messages;
@@ -49,6 +47,11 @@ namespace CodeConcussion.KVL.ViewModels
                 NotifyOfPropertyChange(() => IsMultiplication);
                 NotifyOfPropertyChange(() => Decks);
             }
+        }
+
+        public bool IsPlaying
+        {
+            get { return _started.HasValue; }
         }
 
         private Deck _selectedDeck;
@@ -113,6 +116,7 @@ namespace CodeConcussion.KVL.ViewModels
             _timer.Start();
 
             PublishMessage(MessageType.StartGame, SelectedDeck);
+            NotifyOfPropertyChange(() => IsPlaying);
             NotifyOfPropertyChange(() => Progress);
         }
 
@@ -122,6 +126,8 @@ namespace CodeConcussion.KVL.ViewModels
             _started = null;
             _timer.Stop();
 
+            PublishMessage(MessageType.StopGame);
+            NotifyOfPropertyChange(() => IsPlaying);
             NotifyOfPropertyChange(() => Progress);
             NotifyOfPropertyChange(() => Timing);
         }
@@ -134,7 +140,7 @@ namespace CodeConcussion.KVL.ViewModels
 
         private void FinishGame()
         {
-            var time = DateTime.Now - _started.Value;
+            var time = DateTime.Now - _started.GetValueOrDefault();
             StopGame();
 
             var seconds = decimal.Round((decimal)time.TotalSeconds, 1, MidpointRounding.AwayFromZero);
