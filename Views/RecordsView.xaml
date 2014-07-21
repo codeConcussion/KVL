@@ -6,14 +6,14 @@
     Width="202"
     Height="94">
     
-    <DockPanel Margin="16">
-        <Label DockPanel.Dock="Top">Records</Label>
+    <DockPanel Margin="4 4 4 16">
         <Button
             x:Name="Close"
-            Content="_Close"
-            Width="80"
-            Margin="0 16 0 0"
             HorizontalAlignment="Right"
-            DockPanel.Dock="Bottom" />
+            DockPanel.Dock="Top">
+            <Image Source="../Resources/Close.png" Width="16" Height="16"/>
+        </Button>
+        
+        <Label DockPanel.Dock="Top">Records</Label>
     </DockPanel>
 </UserControl>

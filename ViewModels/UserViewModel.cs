@@ -10,23 +10,13 @@ namespace CodeConcussion.KVL.ViewModels
 
         public void Close()
         {
-            PublishMessage(MessageType.CloseUser);
-        }
-
-        public void Cancel()
-        {
-            if (!string.IsNullOrWhiteSpace(User)) Close();
-        }
-
-        public void Ok()
-        {
             if (string.IsNullOrWhiteSpace(User)) return;
 
             var user = new User(User);
             //TODO:load records
             Context.User = user;
-            
-            Close();
+
+            PublishMessage(MessageType.CloseUser);
         }
     }
 }

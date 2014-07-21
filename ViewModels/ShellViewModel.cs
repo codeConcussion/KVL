@@ -2,7 +2,6 @@
 using Caliburn.Micro;
 using CodeConcussion.KVL.Messages;
 using CodeConcussion.KVL.Utilities.Game;
-using CodeConcussion.KVL.Views;
 
 namespace CodeConcussion.KVL.ViewModels
 {
@@ -15,13 +14,14 @@ namespace CodeConcussion.KVL.ViewModels
             SettingsViewModel settingsViewModel,
             UserViewModel userViewModel)
         {
-            DisplayName = "KVL";
             GameViewModel = gameViewModel;
             MessageViewModel = messageViewModel;
             RecordsViewModel = recordsViewModel;
             SettingsViewModel = settingsViewModel;
             UserViewModel = userViewModel;
-            Context.User = UserStorage.LoadUser("toby");
+            
+            SetTitle();
+            IsUserActive = true;
         }
 
         public string DisplayName { get; set; }
@@ -63,6 +63,7 @@ namespace CodeConcussion.KVL.ViewModels
             {
                 if (_isUserActive == value) return;
                 _isUserActive = value;
+                SetTitle();
                 NotifyOfPropertyChange(() => IsUserActive);
             }
         }
@@ -76,6 +77,12 @@ namespace CodeConcussion.KVL.ViewModels
             map.Add(MessageType.NoRecord, x => IsMessageActive = true);
             map.Add(MessageType.OpenRecords, x => IsRecordsActive = true);
             map.Add(MessageType.OpenUser, x => IsUserActive = true);
+        }
+
+        private void SetTitle()
+        {
+            DisplayName = Context.User == null ? "KVL" : "KVL :: " + Context.User.Name;
+            NotifyOfPropertyChange(() => DisplayName);
         }
     }
 }

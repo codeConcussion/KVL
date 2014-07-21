@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using CodeConcussion.KVL.Entities;
 using CodeConcussion.KVL.Messages;
-using CodeConcussion.KVL.Utilities.Game;
 using Control = System.Windows.Controls.Control;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
@@ -109,7 +107,7 @@ namespace CodeConcussion.KVL.ViewModels
         private void KeyDown(object sender, RoutedEventArgs e)
         {
             var args = e as KeyEventArgs;
-            if (args == null) return;
+            if (args == null || !HasCurrentCard) return;
 
             args.Handled = true;
             var isAction = KeyMap.ContainsKey(args.Key);
