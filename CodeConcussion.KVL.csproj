@@ -88,6 +88,7 @@
     <Compile Include="Messages\MessageType.cs" />
     <Compile Include="Utilities\Container\AutoSubscriptionModule.cs" />
     <Compile Include="Utilities\Container\ContainerBootstrapper.cs" />
+    <Compile Include="Utilities\Converters\BoolToValueConverter.cs" />
     <Compile Include="Utilities\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Utilities\Game\Context.cs" />
     <Compile Include="Utilities\Game\DeckConfiguration.cs" />

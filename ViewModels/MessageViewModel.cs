@@ -25,13 +25,27 @@ namespace CodeConcussion.KVL.ViewModels
             }
         }
 
+        private bool _isNewRecord;
+        public bool IsNewRecord
+        {
+            get { return _isNewRecord; }
+            set
+            {
+                if (_isNewRecord == value) return;
+                _isNewRecord = value;
+                NotifyOfPropertyChange(() => IsNewRecord);
+            }
+        }
+        
         private void NewRecord(Record record)
         {
+            IsNewRecord = true;
             Message = string.Format(MessageConfiguration.Messages[GameMessage.NewRecord], Context.User.Name, record.Description, FormatTime(record.Seconds));
         }
 
         private void NoRecord(Record record)
         {
+            IsNewRecord = false;
             Message = string.Format(MessageConfiguration.Messages[GameMessage.NoRecord], Context.User.Name, record.Description, FormatTime(record.Seconds));
         }
 

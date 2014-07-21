@@ -1,20 +1,18 @@
-﻿using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
+﻿using System.Windows;
 
 namespace CodeConcussion.KVL.Utilities.Converters
 {
-    public class BoolToVisibilityConverter : IValueConverter
+    public class BoolToVisibilityConverter : BoolToValueConverter<Visibility>
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public BoolToVisibilityConverter()
         {
-            return (value as bool? ?? false) ? Visibility.Visible : Visibility.Hidden;
+
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public BoolToVisibilityConverter(Visibility trueValue, Visibility falseValue)
         {
-            return (value as Visibility? ?? Visibility.Hidden) == Visibility.Visible;
+            TrueValue = trueValue;
+            FalseValue = falseValue;
         }
     }
 }
