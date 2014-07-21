@@ -97,10 +97,13 @@
     <Compile Include="Entities\Record.cs" />
     <Compile Include="Entities\Operation.cs" />
     <Compile Include="Utilities\Extensions.cs" />
+    <Compile Include="Utilities\Game\GameMessage.cs" />
     <Compile Include="Utilities\Game\UserStorage.cs" />
+    <Compile Include="Utilities\Game\MessageConfiguration.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CardViewModel.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
+    <Compile Include="ViewModels\MessageViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\RecordsViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
@@ -109,6 +112,9 @@
     </Compile>
     <Compile Include="Views\GameView.xaml.cs">
       <DependentUpon>GameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MessageView.xaml.cs">
+      <DependentUpon>MessageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RecordsView.xaml.cs">
       <DependentUpon>RecordsView.xaml</DependentUpon>
@@ -138,6 +144,10 @@
     <Page Include="Views\GameView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MessageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\RecordsView.xaml">
       <Generator>MSBuild:Compile</Generator>

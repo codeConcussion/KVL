@@ -20,6 +20,13 @@
         <ContentControl x:Name="GameViewModel" />
         <ContentControl x:Name="SettingsViewModel" Grid.Column="1" />
 
+        <Border x:Name="IsMessageActive" Style="{StaticResource FadeIn}" Grid.ColumnSpan="2">
+            <Border.Background>
+                <SolidColorBrush Color="Black" Opacity=".7" />
+            </Border.Background>
+            <ContentControl x:Name="MessageViewModel" />
+        </Border>
+        
         <Border x:Name="IsRecordsActive" Style="{StaticResource FadeIn}" Grid.ColumnSpan="2">
             <Border.Background>
                 <SolidColorBrush Color="Black" Opacity=".7" />

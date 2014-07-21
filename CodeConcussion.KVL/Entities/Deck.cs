@@ -9,6 +9,7 @@ namespace CodeConcussion.KVL.Entities
         public string Key { get; set; }
         public string Description { get; set; }
         public Operation Operation { get; set; }
+        public int Order { get; set; }
 
         public Card CurrentCard { get; set; }
         public List<Card> Cards { get; set; }

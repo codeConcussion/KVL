@@ -2,10 +2,13 @@
 {
     public enum MessageType
     {
+        CloseMessage,
         CloseRecords,
         CloseUser,
         CorrectAnswer,
         FinishGame,
+        NewRecord,
+        NoRecord,
         OpenRecords,
         OpenUser,
         StartGame

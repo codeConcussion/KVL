@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Threading;
 using CodeConcussion.KVL.Entities;
@@ -133,8 +134,14 @@ namespace CodeConcussion.KVL.ViewModels
 
         private void FinishGame()
         {
+            var time = DateTime.Now - _started.Value;
             StopGame();
-            //TODO:records/messages
+
+            var seconds = decimal.Round((decimal)time.TotalSeconds, 1, MidpointRounding.AwayFromZero);
+            var record = new Record(SelectedDeck, seconds);
+            var isNewRecord = Context.User.UpdateRecord(record);
+            var type = isNewRecord ? MessageType.NewRecord : MessageType.NoRecord;
+            PublishMessage(type, record);
         }
 
         protected override void AddMessageHandlers(Dictionary<MessageType, Action<dynamic>> map)

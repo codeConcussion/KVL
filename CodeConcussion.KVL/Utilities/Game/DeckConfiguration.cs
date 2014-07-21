@@ -17,7 +17,10 @@ namespace CodeConcussion.KVL.Utilities.Game
         private static List<Deck> CreateDecks()
         {
             var settings = ConfigurationManager.AppSettings.AllKeys.Where(x => x.StartsWith("Deck."));
-            var decks = settings.Select(x => DeserializeDeck(ConfigurationManager.AppSettings[x])).Where(x => x != null).ToList();
+            var decks = settings
+                .Select(x => DeserializeDeck(ConfigurationManager.AppSettings[x])).Where(x => x != null)
+                .OrderBy(x => x.Order)
+                .ToList();
             return decks;
         }
 

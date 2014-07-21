@@ -2,6 +2,7 @@
 using Caliburn.Micro;
 using CodeConcussion.KVL.Messages;
 using CodeConcussion.KVL.Utilities.Game;
+using CodeConcussion.KVL.Views;
 
 namespace CodeConcussion.KVL.ViewModels
 {
@@ -9,23 +10,38 @@ namespace CodeConcussion.KVL.ViewModels
     {
         public ShellViewModel(
             GameViewModel gameViewModel,
-            SettingsViewModel settingsViewModel,
+            MessageViewModel messageViewModel,
             RecordsViewModel recordsViewModel,
+            SettingsViewModel settingsViewModel,
             UserViewModel userViewModel)
         {
             DisplayName = "KVL";
             GameViewModel = gameViewModel;
-            SettingsViewModel = settingsViewModel;
+            MessageViewModel = messageViewModel;
             RecordsViewModel = recordsViewModel;
+            SettingsViewModel = settingsViewModel;
             UserViewModel = userViewModel;
             Context.User = UserStorage.LoadUser("toby");
         }
 
         public string DisplayName { get; set; }
         public GameViewModel GameViewModel { get; private set; }
-        public SettingsViewModel SettingsViewModel { get; private set; }
+        public MessageViewModel MessageViewModel { get; private set; }
         public RecordsViewModel RecordsViewModel { get; private set; }
+        public SettingsViewModel SettingsViewModel { get; private set; }
         public UserViewModel UserViewModel { get; private set; }
+
+        private bool _isMessageActive;
+        public bool IsMessageActive
+        {
+            get { return _isMessageActive; }
+            private set
+            {
+                if (_isMessageActive == value) return;
+                _isMessageActive = value;
+                NotifyOfPropertyChange(() => IsMessageActive);
+            }
+        }
 
         private bool _isRecordsActive;
         public bool IsRecordsActive
@@ -53,9 +69,12 @@ namespace CodeConcussion.KVL.ViewModels
 
         protected override void AddMessageHandlers(Dictionary<MessageType, System.Action<dynamic>> map)
         {
+            map.Add(MessageType.CloseMessage, x => IsMessageActive = false);
             map.Add(MessageType.CloseRecords, x => IsRecordsActive = false);
-            map.Add(MessageType.OpenRecords, x => IsRecordsActive = true);
             map.Add(MessageType.CloseUser, x => IsUserActive = false);
+            map.Add(MessageType.NewRecord, x => IsMessageActive = true);
+            map.Add(MessageType.NoRecord, x => IsMessageActive = true);
+            map.Add(MessageType.OpenRecords, x => IsRecordsActive = true);
             map.Add(MessageType.OpenUser, x => IsUserActive = true);
         }
     }
