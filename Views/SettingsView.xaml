@@ -52,7 +52,7 @@
         </Button>
 
         <Button x:Name="OpenRecords">
-            <Image Source="/Resources/Records.png" />
+            <Image Source="/Resources/Star.png" />
         </Button>
 
         <Viewbox>
