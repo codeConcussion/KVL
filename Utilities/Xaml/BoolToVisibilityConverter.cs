@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace CodeConcussion.KVL.Utilities.Converters
+namespace CodeConcussion.KVL.Utilities.Xaml
 {
     public class BoolToVisibilityConverter : BoolToValueConverter<Visibility>
     {

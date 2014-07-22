@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Data;
 
-namespace CodeConcussion.KVL.Utilities.Converters
+namespace CodeConcussion.KVL.Utilities.Xaml
 {
     public abstract class BoolToValueConverter<T> : IValueConverter
     {

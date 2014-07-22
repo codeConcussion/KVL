@@ -63,6 +63,7 @@ namespace CodeConcussion.KVL.ViewModels
                 if (_selectedDeck == value) return;
                 _selectedDeck = value;
                 NotifyOfPropertyChange(() => SelectedDeck);
+                if (_started.HasValue) StopGame();
             }
         }
 
@@ -156,6 +157,8 @@ namespace CodeConcussion.KVL.ViewModels
         {
             map.Add(MessageType.CorrectAnswer, x => CorrectAnswer(x));
             map.Add(MessageType.FinishGame, x => FinishGame());
+            map.Add(MessageType.OpenRecords, x => StopGame());
+            map.Add(MessageType.OpenUser, x => StopGame());
         }
     }
 }

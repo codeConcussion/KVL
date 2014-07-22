@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using Autofac;
 using Caliburn.Micro;
+using CodeConcussion.KVL.Utilities.Xaml;
 using CodeConcussion.KVL.ViewModels;
 
 namespace CodeConcussion.KVL.Utilities.Container
@@ -17,7 +19,13 @@ namespace CodeConcussion.KVL.Utilities.Container
         }
         
         private readonly Type _viewModelBaseType = typeof(System.ComponentModel.INotifyPropertyChanged);
+        private Func<IEnumerable<FrameworkElement>, Type, IEnumerable<FrameworkElement>> _previousPropertyBinder;
         private static IContainer _container;
+
+        public static T Resolve<T>()
+        {
+            return _container.Resolve<T>();
+        }
 
         protected override void BuildUp(object instance)
         {
@@ -51,6 +59,8 @@ namespace CodeConcussion.KVL.Utilities.Container
             builder.RegisterModule<AutoSubscriptionModule>();
 
             _container = builder.Build();
+
+            ExtendBinder();
         }
 
         protected override IEnumerable<object> GetAllInstances(Type service)
@@ -70,7 +80,7 @@ namespace CodeConcussion.KVL.Utilities.Container
                 if (_container.TryResolveNamed(key, service, out instance)) return instance;
             }
 
-            throw new Exception(string.Format("Could not locate any instances of contract {0}.", key ?? service.Name));
+            throw new Exception(string.Format("Could not locate any instances of {0}.", key ?? service.Name));
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)
@@ -78,19 +88,30 @@ namespace CodeConcussion.KVL.Utilities.Container
             DisplayRootViewFor<ShellViewModel>();
 
             Application.Current.MainWindow.SizeToContent = SizeToContent.Manual;
-            //Application.Current.MainWindow.Width = (SystemParameters.PrimaryScreenWidth * .75);
-            //Application.Current.MainWindow.Height = (SystemParameters.PrimaryScreenHeight * .75);
-            //Application.Current.MainWindow.Left = (SystemParameters.PrimaryScreenWidth * .125);
-            //Application.Current.MainWindow.Top = (SystemParameters.PrimaryScreenHeight * .125);
-            Application.Current.MainWindow.Width = 1024;
-            Application.Current.MainWindow.Height = 768;
-            Application.Current.MainWindow.MinWidth = 458;
-            Application.Current.MainWindow.MinHeight = 334;
+            Application.Current.MainWindow.Width = 650;
+            Application.Current.MainWindow.Height = 650;
+            Application.Current.MainWindow.MinWidth = 480;
+            Application.Current.MainWindow.MinHeight = 480;
         }
 
-        public static T Resolve<T>()
+        private void ExtendBinder()
         {
-            return _container.Resolve<T>();
+            _previousPropertyBinder = ViewModelBinder.BindProperties;
+            ViewModelBinder.BindProperties = BindFocus;
+        }
+
+        private IEnumerable<FrameworkElement> BindFocus(IEnumerable<FrameworkElement> controls, Type modelType)
+        {
+            var unmatched = _previousPropertyBinder(controls, modelType);
+            var properties = modelType.GetProperties(BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.Public);
+            
+            foreach (var control in controls)
+            {
+                var focusPropertyName = "Is" + control.Name + "Focused";
+                FocusExtension.CheckForFocusProperty(focusPropertyName, properties, control);
+            }
+
+            return unmatched;
         }
     }
 }
