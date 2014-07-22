@@ -84,10 +84,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Messages\ViewModelMessage.cs" />
-    <Compile Include="Messages\MessageType.cs" />
+    <Compile Include="Utilities\Messages\ViewModelMessage.cs" />
+    <Compile Include="Utilities\Messages\MessageType.cs" />
     <Compile Include="Utilities\Container\AutoSubscriptionModule.cs" />
     <Compile Include="Utilities\Container\ContainerBootstrapper.cs" />
+    <Compile Include="Utilities\Game\GameManager.cs" />
+    <Compile Include="Utilities\Messages\MessageDispatch.cs" />
     <Compile Include="Utilities\Xaml\BoolToValueConverter.cs" />
     <Compile Include="Utilities\Xaml\BoolToVisibilityConverter.cs" />
     <Compile Include="Utilities\Game\Context.cs" />
@@ -97,9 +99,9 @@
     <Compile Include="Entities\Record.cs" />
     <Compile Include="Entities\Operation.cs" />
     <Compile Include="Utilities\Extensions.cs" />
-    <Compile Include="Utilities\Game\GameMessage.cs" />
+    <Compile Include="Utilities\Game\UserMessage.cs" />
     <Compile Include="Utilities\Game\UserStorage.cs" />
-    <Compile Include="Utilities\Game\MessageConfiguration.cs" />
+    <Compile Include="Utilities\Game\UserMessageConfiguration.cs" />
     <Compile Include="Utilities\Xaml\FocusExtension.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CardViewModel.cs" />

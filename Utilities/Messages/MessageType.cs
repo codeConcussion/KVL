@@ -1,12 +1,11 @@
-﻿namespace CodeConcussion.KVL.Messages
+﻿namespace CodeConcussion.KVL.Utilities.Messages
 {
     public enum MessageType
     {
         CloseMessage,
         CloseRecords,
         CloseUser,
-        CorrectAnswer,
-        FinishGame,
+        DealCard,
         NewRecord,
         NoRecord,
         OpenRecords,

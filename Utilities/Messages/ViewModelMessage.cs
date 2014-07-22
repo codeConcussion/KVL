@@ -1,4 +1,4 @@
-﻿namespace CodeConcussion.KVL.Messages
+﻿namespace CodeConcussion.KVL.Utilities.Messages
 {
     public sealed class ViewModelMessage
     {

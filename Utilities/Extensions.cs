@@ -20,5 +20,14 @@ namespace CodeConcussion.KVL.Utilities
             if (value == Operation.Multiplication) return "x";
             return "";
         }
+
+        [DebuggerStepThrough]
+        public static string GetTiming(this decimal value)
+        {
+            if (value <= 0) return "";
+            var minutes = (int)value / 60;
+            var seconds = value - (minutes * 60);
+            return string.Format("{0:D2}:{1:00.0}", minutes, seconds);
+        }
     }
 }

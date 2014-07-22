@@ -1,8 +1,10 @@
-﻿namespace CodeConcussion.KVL.Entities
+﻿using CodeConcussion.KVL.Utilities;
+
+namespace CodeConcussion.KVL.Entities
 {
     public sealed class Record
     {
-        public Record() { }
+        public Record() { } //needed for json serialization
 
         public Record(Deck deck, decimal seconds)
         {
@@ -22,13 +24,7 @@
 
         public string DisplayTime
         {
-            get
-            {
-                if (Seconds <= 0) return "";
-                var minutes = (int)Seconds / 60;
-                var seconds = Seconds - (minutes * 60);
-                return string.Format("{0:D2}:{1:00.0}", minutes, seconds);
-            }
+            get { return Seconds.GetTiming(); }
         }
     }
 }

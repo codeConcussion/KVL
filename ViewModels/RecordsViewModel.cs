@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using CodeConcussion.KVL.Entities;
-using CodeConcussion.KVL.Messages;
 using CodeConcussion.KVL.Utilities.Game;
+using CodeConcussion.KVL.Utilities.Messages;
 
 namespace CodeConcussion.KVL.ViewModels
 {

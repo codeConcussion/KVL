@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Windows;
 using Autofac;
 using Caliburn.Micro;
+using CodeConcussion.KVL.Utilities.Game;
+using CodeConcussion.KVL.Utilities.Messages;
 using CodeConcussion.KVL.Utilities.Xaml;
 using CodeConcussion.KVL.ViewModels;
 
@@ -58,6 +60,10 @@ namespace CodeConcussion.KVL.Utilities.Container
             builder.Register<IEventAggregator>(x => new EventAggregator()).InstancePerLifetimeScope();
             builder.RegisterModule<AutoSubscriptionModule>();
 
+            //kvl
+            builder.RegisterType<GameManager>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<MessageDispatch>().AsSelf().InstancePerLifetimeScope();
+
             _container = builder.Build();
 
             ExtendBinder();
@@ -88,6 +94,8 @@ namespace CodeConcussion.KVL.Utilities.Container
             DisplayRootViewFor<ShellViewModel>();
 
             Application.Current.MainWindow.SizeToContent = SizeToContent.Manual;
+            Application.Current.MainWindow.Left = (SystemParameters.PrimaryScreenWidth - 650) / 2;
+            Application.Current.MainWindow.Top = (SystemParameters.PrimaryScreenHeight - 650) / 2;
             Application.Current.MainWindow.Width = 650;
             Application.Current.MainWindow.Height = 650;
             Application.Current.MainWindow.MinWidth = 480;
@@ -102,13 +110,14 @@ namespace CodeConcussion.KVL.Utilities.Container
 
         private IEnumerable<FrameworkElement> BindFocus(IEnumerable<FrameworkElement> controls, Type modelType)
         {
-            var unmatched = _previousPropertyBinder(controls, modelType);
+            var elements = controls.ToList();
+            var unmatched = _previousPropertyBinder(elements, modelType);
             var properties = modelType.GetProperties(BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.Public);
             
-            foreach (var control in controls)
+            foreach (var element in elements)
             {
-                var focusPropertyName = "Is" + control.Name + "Focused";
-                FocusExtension.CheckForFocusProperty(focusPropertyName, properties, control);
+                var focusPropertyName = "Is" + element.Name + "Focused";
+                FocusExtension.CheckForFocusProperty(focusPropertyName, properties, element);
             }
 
             return unmatched;

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using CodeConcussion.KVL.Entities;
-using CodeConcussion.KVL.Messages;
+using CodeConcussion.KVL.Utilities.Game;
+using CodeConcussion.KVL.Utilities.Messages;
 using Control = System.Windows.Controls.Control;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
@@ -11,17 +11,21 @@ namespace CodeConcussion.KVL.ViewModels
 {
     public sealed class GameViewModel : BaseViewModel
     {
-        public GameViewModel(CardViewModel currentCardViewModel, CardViewModel previewCardViewModel)
+        public GameViewModel(
+            GameManager gameManager,
+            CardViewModel currentCardViewModel,
+            CardViewModel previewCardViewModel)
         {
+            _gameManager = gameManager;
             CurrentCardView = currentCardViewModel;
             PreviewCardView = previewCardViewModel;
             IsAnswerWrong = false;
             EventManager.RegisterClassHandler(typeof(Control), UIElement.KeyDownEvent, new RoutedEventHandler(KeyDown));
         }
 
+        private readonly GameManager _gameManager;
         public CardViewModel CurrentCardView { get; private set; }
         public CardViewModel PreviewCardView { get; private set; }
-        public Deck Deck { get; set; }
 
         private bool _hasCurrentCard;
         public bool HasCurrentCard
@@ -53,6 +57,8 @@ namespace CodeConcussion.KVL.ViewModels
             get { return _isAnswerWrong; }
             set
             {
+                //toggle flag for error animation
+                if (value && IsAnswerWrong) IsAnswerWrong = false;
                 _isAnswerWrong = value;
                 NotifyOfPropertyChange(() => IsAnswerWrong);
             }
@@ -65,27 +71,23 @@ namespace CodeConcussion.KVL.ViewModels
 
         private void Answer()
         {
-            IsAnswerWrong = false;
-            IsAnswerWrong = !CurrentCardView.IsCorrect;
+            IsAnswerWrong = !_gameManager.CheckAnswer(CurrentCardView.Answer);
             Clear();
-            if (IsAnswerWrong) return;
-
-            HasCurrentCard = HasPreviewCard;
-            HasPreviewCard = !Deck.IsLastCard && HasCurrentCard;
-            
-            var type = HasCurrentCard ? MessageType.CorrectAnswer : MessageType.FinishGame;
-            PublishMessage(type, CurrentCardView.Card);
-
-            if (HasCurrentCard)
-            {
-                CurrentCardView.Card = PreviewCardView.Card;
-                PreviewCardView.Card = Deck.Deal();
-            }
+            if (!IsAnswerWrong) Deal();
         }
 
         private void Clear()
         {
             CurrentCardView.Answer = "";
+        }
+
+        private void Deal()
+        {
+            _gameManager.Deal();
+            CurrentCardView.Card = _gameManager.CurrentCard;
+            PreviewCardView.Card = _gameManager.PreviewCard;
+            HasCurrentCard = _gameManager.CurrentCard != null;
+            HasPreviewCard = _gameManager.PreviewCard != null;
         }
 
         private void Delete()
@@ -103,23 +105,17 @@ namespace CodeConcussion.KVL.ViewModels
             if (isAction) KeyMap[args.Key](this);
         }
 
-        private void Start(Deck deck)
+        private void StartGame()
         {
-            Deck = deck;
-            Deck.Shuffle();
-            CurrentCardView.Card = Deck.Deal();
-            PreviewCardView.Card = Deck.Deal();
             HasCurrentCard = HasPreviewCard = true;
+            CurrentCardView.Card = _gameManager.CurrentCard;
+            PreviewCardView.Card = _gameManager.PreviewCard;
         }
-
-        private void Stop()
-        {
-            HasCurrentCard = HasPreviewCard = false;
-        }
+        
         protected override void AddMessageHandlers(Dictionary<MessageType, Action<dynamic>> map)
         {
-            map.Add(MessageType.StartGame, x => Start(x));
-            map.Add(MessageType.StopGame, x => Stop());
+            map.Add(MessageType.StartGame, x => StartGame());
+            map.Add(MessageType.StopGame, x => HasCurrentCard = HasPreviewCard = false);
         }
 
         #region Key Map

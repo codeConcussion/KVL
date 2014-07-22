@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
 using CodeConcussion.KVL.Entities;
-using CodeConcussion.KVL.Messages;
+using CodeConcussion.KVL.Utilities;
 using CodeConcussion.KVL.Utilities.Game;
+using CodeConcussion.KVL.Utilities.Messages;
 
 namespace CodeConcussion.KVL.ViewModels
 {
@@ -12,16 +13,16 @@ namespace CodeConcussion.KVL.ViewModels
     {
         //icons - https://www.iconfinder.com/iconsets/small-n-flat
 
-        public SettingsViewModel()
+        public SettingsViewModel(GameManager gameManager)
         {
+            _gameManager = gameManager;
             _timer.Interval = TimeSpan.FromMilliseconds(100);
             _timer.Tick += (x, y) => NotifyOfPropertyChange(() => Timing);
         }
 
-        private readonly DispatcherTimer _timer = new DispatcherTimer();
+		private readonly DispatcherTimer _timer = new DispatcherTimer();
+        private readonly GameManager _gameManager;
         private Operation _operation = Operation.Addition;
-        private int _progress;
-        private DateTime? _started;
         
         public bool IsAddition
         {
@@ -51,7 +52,7 @@ namespace CodeConcussion.KVL.ViewModels
 
         public bool IsPlaying
         {
-            get { return _started.HasValue; }
+            get { return _gameManager.IsPlaying; }
         }
 
         private Deck _selectedDeck;
@@ -63,7 +64,8 @@ namespace CodeConcussion.KVL.ViewModels
                 if (_selectedDeck == value) return;
                 _selectedDeck = value;
                 NotifyOfPropertyChange(() => SelectedDeck);
-                if (_started.HasValue) StopGame();
+
+                if (_gameManager.IsPlaying) StopGame();
             }
         }
 
@@ -81,9 +83,8 @@ namespace CodeConcussion.KVL.ViewModels
         {
             get
             {
-                if (SelectedDeck == null) return "";
-                if (!_started.HasValue) return "";
-                return string.Format("{0} of {1}", _progress, SelectedDeck.Cards.Count);
+                if (!_gameManager.IsPlaying) return "";
+                return string.Format("{0} of {1}", _gameManager.Progress, SelectedDeck.Cards.Count);
             }
         }
 
@@ -91,12 +92,9 @@ namespace CodeConcussion.KVL.ViewModels
         {
             get
             {
-                if (!_started.HasValue) return "";
-                var delta = DateTime.Now - _started.Value;
-                var minutes = delta.Minutes.ToString("D2");
-                var seconds = delta.Seconds.ToString("D2");
-                var tenths = (delta.Milliseconds / 100).ToString("D1");
-                return string.Format("{0}:{1}.{2}", minutes, seconds, tenths);
+                if (!_gameManager.IsPlaying) return "";
+                var delta = (decimal)(DateTime.Now - _gameManager.StartedAt.GetValueOrDefault()).TotalSeconds;
+                return delta.GetTiming();
             }
         }
 
@@ -112,53 +110,30 @@ namespace CodeConcussion.KVL.ViewModels
 
         public void StartGame()
         {
-            _progress = 1;
-            _started = DateTime.Now;
+            _gameManager.StartGame(SelectedDeck);
             _timer.Start();
 
-            PublishMessage(MessageType.StartGame, SelectedDeck);
-            NotifyOfPropertyChange(() => IsPlaying);
-            NotifyOfPropertyChange(() => Progress);
-        }
-
-        public void StopGame()
-        {
-            _progress = 0;
-            _started = null;
-            _timer.Stop();
-
-            PublishMessage(MessageType.StopGame);
             NotifyOfPropertyChange(() => IsPlaying);
             NotifyOfPropertyChange(() => Progress);
             NotifyOfPropertyChange(() => Timing);
         }
 
-        private void CorrectAnswer(Card card)
+        public void StopGame()
         {
-            _progress = SelectedDeck.Cards.IndexOf(card) + 2;
+            _gameManager.StopGame();
+            _timer.Stop();
+
+            NotifyOfPropertyChange(() => IsPlaying);
             NotifyOfPropertyChange(() => Progress);
-        }
-
-        private void FinishGame()
-        {
-            var time = DateTime.Now - _started.GetValueOrDefault();
-            StopGame();
-
-            var seconds = decimal.Round((decimal)time.TotalSeconds, 1, MidpointRounding.AwayFromZero);
-            var record = new Record(SelectedDeck, seconds);
-            var isNewRecord = Context.User.UpdateRecord(record);
-            if (isNewRecord) UserStorage.SaveUser(Context.User);
-
-            var type = isNewRecord ? MessageType.NewRecord : MessageType.NoRecord;
-            PublishMessage(type, record);
+            NotifyOfPropertyChange(() => Timing);
         }
 
         protected override void AddMessageHandlers(Dictionary<MessageType, Action<dynamic>> map)
         {
-            map.Add(MessageType.CorrectAnswer, x => CorrectAnswer(x));
-            map.Add(MessageType.FinishGame, x => FinishGame());
+            map.Add(MessageType.DealCard, x => NotifyOfPropertyChange(() => Progress));
             map.Add(MessageType.OpenRecords, x => StopGame());
             map.Add(MessageType.OpenUser, x => StopGame());
+            map.Add(MessageType.StopGame, x => StopGame());
         }
     }
 }

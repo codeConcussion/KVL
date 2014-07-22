@@ -1,6 +1,6 @@
 ﻿namespace CodeConcussion.KVL.Utilities.Game
 {
-    internal enum GameMessage
+    internal enum UserMessage
     {
         NoRecord,
         NewRecord
