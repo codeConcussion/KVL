@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="CodeConcussion.KVL.Views.SettingsView"
+    x:Class="CodeConcussion.KVL.Views.ControlsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:xaml="clr-namespace:CodeConcussion.KVL.Utilities.Xaml"

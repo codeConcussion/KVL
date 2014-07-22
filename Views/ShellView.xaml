@@ -17,28 +17,28 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <ContentControl x:Name="GameViewModel" />
-        <ContentControl x:Name="SettingsViewModel" Grid.Column="1" />
+        <ContentControl x:Name="GameView" />
+        <ContentControl x:Name="ControlsView" Grid.Column="1" />
 
         <Border x:Name="IsMessageActive" Style="{StaticResource FadeIn}" Grid.ColumnSpan="2">
             <Border.Background>
                 <SolidColorBrush Color="Black" Opacity=".7" />
             </Border.Background>
-            <ContentControl x:Name="MessageViewModel" />
+            <ContentControl x:Name="MessageView" />
         </Border>
         
         <Border x:Name="IsRecordsActive" Style="{StaticResource FadeIn}" Grid.ColumnSpan="2">
             <Border.Background>
                 <SolidColorBrush Color="Black" Opacity=".7" />
             </Border.Background>
-            <ContentControl x:Name="RecordsViewModel" />
+            <ContentControl x:Name="RecordsView" />
         </Border>
 
         <Border x:Name="IsUserActive" Style="{StaticResource FadeIn}" Grid.ColumnSpan="2"> 
             <Border.Background>
                 <SolidColorBrush Color="Black" Opacity=".7" />
             </Border.Background>
-            <ContentControl x:Name="UserViewModel" />
+            <ContentControl x:Name="UserView" />
         </Border>
     </Grid>
 </UserControl>

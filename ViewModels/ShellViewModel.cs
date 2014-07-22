@@ -7,28 +7,28 @@ namespace CodeConcussion.KVL.ViewModels
     public sealed class ShellViewModel : BaseViewModel, IHaveDisplayName
     {
         public ShellViewModel(
-            GameViewModel gameViewModel,
-            MessageViewModel messageViewModel,
-            RecordsViewModel recordsViewModel,
-            SettingsViewModel settingsViewModel,
-            UserViewModel userViewModel)
+            GameViewModel gameView,
+            MessageViewModel messageView,
+            RecordsViewModel recordsView,
+            ControlsViewModel controlsView,
+            UserViewModel userView)
         {
-            GameViewModel = gameViewModel;
-            MessageViewModel = messageViewModel;
-            RecordsViewModel = recordsViewModel;
-            SettingsViewModel = settingsViewModel;
-            UserViewModel = userViewModel;
+            GameView = gameView;
+            MessageView = messageView;
+            RecordsView = recordsView;
+            ControlsView = controlsView;
+            UserView = userView;
             
             SetTitle();
             IsUserActive = true;
         }
 
         public string DisplayName { get; set; }
-        public GameViewModel GameViewModel { get; private set; }
-        public MessageViewModel MessageViewModel { get; private set; }
-        public RecordsViewModel RecordsViewModel { get; private set; }
-        public SettingsViewModel SettingsViewModel { get; private set; }
-        public UserViewModel UserViewModel { get; private set; }
+        public GameViewModel GameView { get; private set; }
+        public MessageViewModel MessageView { get; private set; }
+        public RecordsViewModel RecordsView { get; private set; }
+        public ControlsViewModel ControlsView { get; private set; }
+        public UserViewModel UserView { get; private set; }
 
         private bool _isMessageActive;
         public bool IsMessageActive

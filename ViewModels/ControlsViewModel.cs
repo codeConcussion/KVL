@@ -8,11 +8,11 @@ using CodeConcussion.KVL.Utilities.Messages;
 
 namespace CodeConcussion.KVL.ViewModels
 {
-    public sealed class SettingsViewModel : BaseViewModel
+    public sealed class ControlsViewModel : BaseViewModel
     {
         //icons - https://www.iconfinder.com/iconsets/small-n-flat
 
-        public SettingsViewModel()
+        public ControlsViewModel()
         {
             _timer.Interval = TimeSpan.FromMilliseconds(100);
             _timer.Tick += (x, y) => NotifyOfPropertyChange(() => Timing);
