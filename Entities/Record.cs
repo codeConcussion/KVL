@@ -19,5 +19,16 @@
         public Operation Operation { get; set; }
         public int Order { get; set; }
         public decimal Seconds { get; set; }
+
+        public string DisplayTime
+        {
+            get
+            {
+                if (Seconds <= 0) return "";
+                var minutes = (int)Seconds / 60;
+                var seconds = Seconds - (minutes * 60);
+                return string.Format("{0:D2}:{1:00.0}", minutes, seconds);
+            }
+        }
     }
 }

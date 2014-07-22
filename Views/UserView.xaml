@@ -23,7 +23,7 @@
 
         <Button
             x:Name="Close"
-            Content="OK"
+            Content="_OK"
             Width="56"
             Height="24"
             Margin="4 0"

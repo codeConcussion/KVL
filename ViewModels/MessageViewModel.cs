@@ -40,20 +40,13 @@ namespace CodeConcussion.KVL.ViewModels
         private void NewRecord(Record record)
         {
             IsNewRecord = true;
-            Message = string.Format(MessageConfiguration.Messages[GameMessage.NewRecord], Context.User.Name, record.Description, FormatTime(record.Seconds));
+            Message = string.Format(MessageConfiguration.Messages[GameMessage.NewRecord], Context.User.Name, record.Description, record.DisplayTime);
         }
 
         private void NoRecord(Record record)
         {
             IsNewRecord = false;
-            Message = string.Format(MessageConfiguration.Messages[GameMessage.NoRecord], Context.User.Name, record.Description, FormatTime(record.Seconds));
-        }
-
-        private string FormatTime(decimal time)
-        {
-            var minutes = (int)time / 60;
-            var seconds = time - (minutes * 60);
-            return string.Format("{0:D2}:{1:00.0}", minutes, seconds);
+            Message = string.Format(MessageConfiguration.Messages[GameMessage.NoRecord], Context.User.Name, record.Description, record.DisplayTime);
         }
 
         protected override void AddMessageHandlers(Dictionary<MessageType, Action<dynamic>> map)

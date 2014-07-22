@@ -11,11 +11,12 @@ namespace CodeConcussion.KVL.ViewModels
         {
             _eventAggregator = ContainerBootstrapper.Resolve<IEventAggregator>();
             _messageHandlers = new Dictionary<MessageType, System.Action<dynamic>>();
+
+            // ReSharper disable once DoNotCallOverridableMethodsInConstructor
             AddMessageHandlers(_messageHandlers);
         }
 
         private readonly IEventAggregator _eventAggregator;
-        //private readonly Dictionary<MessageType, System.Action> _messageHandlers;
         private readonly Dictionary<MessageType, System.Action<dynamic>> _messageHandlers;
 
         protected virtual void AddMessageHandlers(Dictionary<MessageType, System.Action<dynamic>> map) { }

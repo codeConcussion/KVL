@@ -31,7 +31,7 @@ namespace CodeConcussion.KVL.Utilities.Container
             //view models
             builder.RegisterAssemblyTypes(AssemblySource.Instance.ToArray())
                 .Where(x => x.Name.EndsWith("ViewModel"))
-                .Where(x => !(string.IsNullOrWhiteSpace(x.Namespace)) && x.Namespace.EndsWith("ViewModels"))
+                .Where(x => x.Namespace != null && x.Namespace.EndsWith("ViewModels"))
                 .Where(x => x.GetInterface(_viewModelBaseType.Name, false) != null)
                 .AsSelf()
                 .InstancePerDependency();
@@ -39,7 +39,7 @@ namespace CodeConcussion.KVL.Utilities.Container
             //views
             builder.RegisterAssemblyTypes(AssemblySource.Instance.ToArray())
                 .Where(x => x.Name.EndsWith("View"))
-                .Where(x => !(string.IsNullOrWhiteSpace(x.Namespace)) && x.Namespace.EndsWith("Views"))
+                .Where(x => x.Namespace != null && x.Namespace.EndsWith("Views"))
                 .AsSelf()
                 .InstancePerDependency();
 
