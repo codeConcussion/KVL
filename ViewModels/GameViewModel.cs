@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using CodeConcussion.KVL.Utilities.Game;
 using CodeConcussion.KVL.Utilities.Messages;
 using Control = System.Windows.Controls.Control;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
@@ -11,19 +10,14 @@ namespace CodeConcussion.KVL.ViewModels
 {
     public sealed class GameViewModel : BaseViewModel
     {
-        public GameViewModel(
-            GameManager gameManager,
-            CardViewModel currentCardViewModel,
-            CardViewModel previewCardViewModel)
+        public GameViewModel(CardViewModel currentCardViewModel, CardViewModel previewCardViewModel)
         {
-            _gameManager = gameManager;
             CurrentCardView = currentCardViewModel;
             PreviewCardView = previewCardViewModel;
             IsAnswerWrong = false;
             EventManager.RegisterClassHandler(typeof(Control), UIElement.KeyDownEvent, new RoutedEventHandler(KeyDown));
         }
 
-        private readonly GameManager _gameManager;
         public CardViewModel CurrentCardView { get; private set; }
         public CardViewModel PreviewCardView { get; private set; }
 
@@ -71,7 +65,7 @@ namespace CodeConcussion.KVL.ViewModels
 
         private void Answer()
         {
-            IsAnswerWrong = !_gameManager.CheckAnswer(CurrentCardView.Answer);
+            IsAnswerWrong = !GameManager.CheckAnswer(CurrentCardView.Answer);
             Clear();
             if (!IsAnswerWrong) Deal();
         }
@@ -83,11 +77,11 @@ namespace CodeConcussion.KVL.ViewModels
 
         private void Deal()
         {
-            _gameManager.Deal();
-            CurrentCardView.Card = _gameManager.CurrentCard;
-            PreviewCardView.Card = _gameManager.PreviewCard;
-            HasCurrentCard = _gameManager.CurrentCard != null;
-            HasPreviewCard = _gameManager.PreviewCard != null;
+            GameManager.Deal();
+            CurrentCardView.Card = GameManager.CurrentCard;
+            PreviewCardView.Card = GameManager.PreviewCard;
+            HasCurrentCard = GameManager.CurrentCard != null;
+            HasPreviewCard = GameManager.PreviewCard != null;
         }
 
         private void Delete()
@@ -108,8 +102,8 @@ namespace CodeConcussion.KVL.ViewModels
         private void StartGame()
         {
             HasCurrentCard = HasPreviewCard = true;
-            CurrentCardView.Card = _gameManager.CurrentCard;
-            PreviewCardView.Card = _gameManager.PreviewCard;
+            CurrentCardView.Card = GameManager.CurrentCard;
+            PreviewCardView.Card = GameManager.PreviewCard;
         }
         
         protected override void AddMessageHandlers(Dictionary<MessageType, Action<dynamic>> map)

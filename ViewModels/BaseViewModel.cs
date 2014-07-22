@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Caliburn.Micro;
 using CodeConcussion.KVL.Utilities.Container;
+using CodeConcussion.KVL.Utilities.Game;
 using CodeConcussion.KVL.Utilities.Messages;
 
 namespace CodeConcussion.KVL.ViewModels
@@ -10,6 +11,7 @@ namespace CodeConcussion.KVL.ViewModels
         protected BaseViewModel()
         {
             _dispatcher = ContainerBootstrapper.Resolve<MessageDispatch>();
+            _gameManager = ContainerBootstrapper.Resolve<GameManager>();
             _messageHandlers = new Dictionary<MessageType, System.Action<dynamic>>();
 
             // ReSharper disable once DoNotCallOverridableMethodsInConstructor
@@ -18,6 +20,9 @@ namespace CodeConcussion.KVL.ViewModels
 
         private readonly MessageDispatch _dispatcher;
         private readonly Dictionary<MessageType, System.Action<dynamic>> _messageHandlers;
+
+        private readonly GameManager _gameManager;
+        protected GameManager GameManager { get { return _gameManager; } }
 
         protected virtual void AddMessageHandlers(Dictionary<MessageType, System.Action<dynamic>> map) { }
 

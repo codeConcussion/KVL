@@ -24,7 +24,7 @@ namespace CodeConcussion.KVL.ViewModels
         {
             if (string.IsNullOrWhiteSpace(User)) return;
 
-            Context.User = UserStorage.LoadUser(User);
+            GameManager.User = UserStorage.LoadUser(User);
             PublishMessage(MessageType.CloseUser);
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CodeConcussion.KVL.Entities;
 using CodeConcussion.KVL.Utilities.Messages;
 
@@ -12,7 +13,10 @@ namespace CodeConcussion.KVL.Utilities.Game
         }
 
         private readonly MessageDispatch _dispatcher;
-        
+
+        public User User { get; set; }
+        public List<Deck> AllDecks { get { return DeckConfiguration.Decks; } }
+
         public Deck Deck { get; private set; }
         public Card CurrentCard { get; private set; }
         public Card PreviewCard { get; private set; }
@@ -20,7 +24,7 @@ namespace CodeConcussion.KVL.Utilities.Game
         public DateTime? StartedAt { get; private set; }
         public decimal Elapsed { get; private set; }
         public int Progress { get; private set; }
-
+        
         public bool CheckAnswer(string guess)
         {
             var answer = int.Parse("0" + guess.Trim());
@@ -42,6 +46,19 @@ namespace CodeConcussion.KVL.Utilities.Game
             {
                 FinishGame();
             }
+        }
+
+        public void FinishGame()
+        {
+            StopGame();
+
+            var seconds = decimal.Round(Elapsed, 1, MidpointRounding.AwayFromZero);
+            var record = new Record(Deck, seconds);
+            var isNewRecord = User.UpdateRecord(record);
+            if (isNewRecord) UserStorage.SaveUser(User);
+
+            var type = isNewRecord ? MessageType.NewRecord : MessageType.NoRecord;
+            _dispatcher.PublishMessage(type, record);
         }
 
         public void StartGame(Deck deck)
@@ -66,19 +83,6 @@ namespace CodeConcussion.KVL.Utilities.Game
             IsPlaying = false;
             StartedAt = null;
             _dispatcher.PublishMessage(MessageType.StopGame);
-        }
-
-        public void FinishGame()
-        {
-            StopGame();
-
-            var seconds = decimal.Round(Elapsed, 1, MidpointRounding.AwayFromZero);
-            var record = new Record(Deck, seconds);
-            var isNewRecord = Context.User.UpdateRecord(record);
-            if (isNewRecord) UserStorage.SaveUser(Context.User);
-
-            var type = isNewRecord ? MessageType.NewRecord : MessageType.NoRecord;
-            _dispatcher.PublishMessage(type, record);
         }
     }
 }

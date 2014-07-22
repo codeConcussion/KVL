@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using CodeConcussion.KVL.Entities;
-using CodeConcussion.KVL.Utilities.Game;
 using CodeConcussion.KVL.Utilities.Messages;
 
 namespace CodeConcussion.KVL.ViewModels
@@ -30,16 +29,16 @@ namespace CodeConcussion.KVL.ViewModels
             NotifyOfPropertyChange(() => MultiplicationRecords);
         }
 
-        private static List<Record> GetRecords(Operation operation)
+        private List<Record> GetRecords(Operation operation)
         {
-            if (Context.User == null) return new List<Record>();
+            if (GameManager.User == null) return new List<Record>();
 
-            var allRecords = Context.Decks
+            var allRecords = GameManager.AllDecks
                 .Where(x => x.Operation == operation)
                 .Select(x => new Record(x, 0m))
                 .ToList();
 
-            var userRecords = Context.User.Records
+            var userRecords = GameManager.User.Records
                 .Where(x => x.Operation == operation)
                 .OrderBy(x => x.Order)
                 .ToList();

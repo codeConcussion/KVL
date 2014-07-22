@@ -40,13 +40,13 @@ namespace CodeConcussion.KVL.ViewModels
         private void NewRecord(Record record)
         {
             IsNewRecord = true;
-            Message = string.Format(UserMessageConfiguration.Messages[UserMessage.NewRecord], Context.User.Name, record.Description, record.DisplayTime);
+            Message = string.Format(UserMessageConfiguration.Messages[UserMessage.NewRecord], GameManager.User.Name, record.Description, record.DisplayTime);
         }
 
         private void NoRecord(Record record)
         {
             IsNewRecord = false;
-            Message = string.Format(UserMessageConfiguration.Messages[UserMessage.NoRecord], Context.User.Name, record.Description, record.DisplayTime);
+            Message = string.Format(UserMessageConfiguration.Messages[UserMessage.NoRecord], GameManager.User.Name, record.Description, record.DisplayTime);
         }
 
         protected override void AddMessageHandlers(Dictionary<MessageType, Action<dynamic>> map)

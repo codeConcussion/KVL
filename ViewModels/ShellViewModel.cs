@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Caliburn.Micro;
-using CodeConcussion.KVL.Utilities.Game;
 using CodeConcussion.KVL.Utilities.Messages;
 
 namespace CodeConcussion.KVL.ViewModels
@@ -81,7 +80,7 @@ namespace CodeConcussion.KVL.ViewModels
 
         private void SetTitle()
         {
-            DisplayName = Context.User == null ? "KVL" : "KVL :: " + Context.User.Name;
+            DisplayName = GameManager.User == null ? "KVL" : "KVL :: " + GameManager.User.Name;
             NotifyOfPropertyChange(() => DisplayName);
         }
     }
