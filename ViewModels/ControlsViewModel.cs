@@ -105,6 +105,11 @@ namespace CodeConcussion.KVL.ViewModels
             PublishMessage(MessageType.OpenRecords);
         }
 
+        public void OpenSettings()
+        {
+            PublishMessage(MessageType.OpenSettings);
+        }
+
         public void StartGame()
         {
             GameManager.StartGame(SelectedDeck);
@@ -129,6 +134,7 @@ namespace CodeConcussion.KVL.ViewModels
         {
             map.Add(MessageType.DealCard, x => NotifyOfPropertyChange(() => Progress));
             map.Add(MessageType.OpenRecords, x => StopGame());
+            map.Add(MessageType.OpenSettings, x => StopGame());
             map.Add(MessageType.OpenUser, x => StopGame());
             map.Add(MessageType.StopGame, x => StopGame());
         }

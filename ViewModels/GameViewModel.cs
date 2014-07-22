@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using CodeConcussion.KVL.Utilities.Messages;
 using Control = System.Windows.Controls.Control;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
@@ -20,6 +21,7 @@ namespace CodeConcussion.KVL.ViewModels
 
         public CardViewModel CurrentCardView { get; private set; }
         public CardViewModel PreviewCardView { get; private set; }
+        public Brush BackgroundColor { get { return new SolidColorBrush(GameManager.BackgroundColor); } }
 
         private bool _hasCurrentCard;
         public bool HasCurrentCard
@@ -67,7 +69,15 @@ namespace CodeConcussion.KVL.ViewModels
         {
             IsAnswerWrong = !GameManager.CheckAnswer(CurrentCardView.Answer);
             Clear();
-            if (!IsAnswerWrong) Deal();
+
+            if (IsAnswerWrong)
+            {
+                PlayErrorSound();
+            }
+            else
+            {
+                Deal();
+            }
         }
 
         private void Clear()
@@ -99,6 +109,11 @@ namespace CodeConcussion.KVL.ViewModels
             if (isAction) KeyMap[args.Key](this);
         }
 
+        private void PlayErrorSound()
+        {
+            if (GameManager.PlayErrorSound) System.Media.SystemSounds.Exclamation.Play();
+        }
+
         private void StartGame()
         {
             HasCurrentCard = HasPreviewCard = true;
@@ -110,6 +125,7 @@ namespace CodeConcussion.KVL.ViewModels
         {
             map.Add(MessageType.StartGame, x => StartGame());
             map.Add(MessageType.StopGame, x => HasCurrentCard = HasPreviewCard = false);
+            map.Add(MessageType.CloseSettings, x => NotifyOfPropertyChange(() => BackgroundColor));
         }
 
         #region Key Map

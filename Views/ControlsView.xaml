@@ -63,6 +63,10 @@
             <Image Source="/Resources/Star.png" />
         </Button>
 
+        <Button x:Name="OpenSettings">
+            <Image Source="/Resources/Star.png" />
+        </Button>
+
         <Viewbox>
             <Label x:Name="Timing" />
         </Viewbox>

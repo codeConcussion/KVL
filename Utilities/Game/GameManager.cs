@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Media;
 using CodeConcussion.KVL.Entities;
 using CodeConcussion.KVL.Utilities.Messages;
 
@@ -10,12 +11,15 @@ namespace CodeConcussion.KVL.Utilities.Game
         public GameManager(MessageDispatch dispatcher)
         {
             _dispatcher = dispatcher;
+            BackgroundColor = Color.FromArgb(255, 0, 128, 0);
         }
 
         private readonly MessageDispatch _dispatcher;
 
         public User User { get; set; }
         public List<Deck> AllDecks { get { return DeckConfiguration.Decks; } }
+        public Color BackgroundColor { get; set; }
+        public bool PlayErrorSound { get; set; }
 
         public Deck Deck { get; private set; }
         public Card CurrentCard { get; private set; }

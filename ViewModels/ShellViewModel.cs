@@ -8,15 +8,17 @@ namespace CodeConcussion.KVL.ViewModels
     {
         public ShellViewModel(
             GameViewModel gameView,
+            ControlsViewModel controlsView,
             MessageViewModel messageView,
             RecordsViewModel recordsView,
-            ControlsViewModel controlsView,
+            SettingsViewModel settingsView,
             UserViewModel userView)
         {
             GameView = gameView;
+            ControlsView = controlsView;
             MessageView = messageView;
             RecordsView = recordsView;
-            ControlsView = controlsView;
+            SettingsView = settingsView;
             UserView = userView;
             
             SetTitle();
@@ -25,9 +27,10 @@ namespace CodeConcussion.KVL.ViewModels
 
         public string DisplayName { get; set; }
         public GameViewModel GameView { get; private set; }
+        public ControlsViewModel ControlsView { get; private set; }
         public MessageViewModel MessageView { get; private set; }
         public RecordsViewModel RecordsView { get; private set; }
-        public ControlsViewModel ControlsView { get; private set; }
+        public SettingsViewModel SettingsView { get; private set; }
         public UserViewModel UserView { get; private set; }
 
         private bool _isMessageActive;
@@ -54,6 +57,18 @@ namespace CodeConcussion.KVL.ViewModels
             }
         }
 
+        private bool _isSettingsActive;
+        public bool IsSettingsActive
+        {
+            get { return _isSettingsActive; }
+            private set
+            {
+                if (_isSettingsActive == value) return;
+                _isSettingsActive = value;
+                NotifyOfPropertyChange(() => IsSettingsActive);
+            }
+        }
+
         private bool _isUserActive;
         public bool IsUserActive
         {
@@ -71,10 +86,12 @@ namespace CodeConcussion.KVL.ViewModels
         {
             map.Add(MessageType.CloseMessage, x => IsMessageActive = false);
             map.Add(MessageType.CloseRecords, x => IsRecordsActive = false);
+            map.Add(MessageType.CloseSettings, x => IsSettingsActive = false);
             map.Add(MessageType.CloseUser, x => IsUserActive = false);
             map.Add(MessageType.NewRecord, x => IsMessageActive = true);
             map.Add(MessageType.NoRecord, x => IsMessageActive = true);
             map.Add(MessageType.OpenRecords, x => IsRecordsActive = true);
+            map.Add(MessageType.OpenSettings, x => IsSettingsActive = true);
             map.Add(MessageType.OpenUser, x => IsUserActive = true);
         }
 

@@ -4,11 +4,13 @@
     {
         CloseMessage,
         CloseRecords,
+        CloseSettings,
         CloseUser,
         DealCard,
         NewRecord,
         NoRecord,
         OpenRecords,
+        OpenSettings,
         OpenUser,
         StartGame,
         StopGame

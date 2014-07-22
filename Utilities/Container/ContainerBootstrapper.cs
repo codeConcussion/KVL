@@ -94,10 +94,10 @@ namespace CodeConcussion.KVL.Utilities.Container
             DisplayRootViewFor<ShellViewModel>();
 
             Application.Current.MainWindow.SizeToContent = SizeToContent.Manual;
-            Application.Current.MainWindow.Left = (SystemParameters.PrimaryScreenWidth - 650) / 2;
-            Application.Current.MainWindow.Top = (SystemParameters.PrimaryScreenHeight - 650) / 2;
-            Application.Current.MainWindow.Width = 650;
-            Application.Current.MainWindow.Height = 650;
+            Application.Current.MainWindow.Left = (SystemParameters.PrimaryScreenWidth - 780) / 2;
+            Application.Current.MainWindow.Top = (SystemParameters.PrimaryScreenHeight - 780) / 2;
+            Application.Current.MainWindow.Width = 780;
+            Application.Current.MainWindow.Height = 780;
             Application.Current.MainWindow.MinWidth = 480;
             Application.Current.MainWindow.MinHeight = 480;
         }

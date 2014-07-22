@@ -34,6 +34,13 @@
             <ContentControl x:Name="RecordsView" />
         </Border>
 
+        <Border x:Name="IsSettingsActive" Style="{StaticResource FadeIn}" Grid.ColumnSpan="2">
+            <Border.Background>
+                <SolidColorBrush Color="Black" Opacity=".7" />
+            </Border.Background>
+            <ContentControl x:Name="SettingsView" />
+        </Border>
+
         <Border x:Name="IsUserActive" Style="{StaticResource FadeIn}" Grid.ColumnSpan="2"> 
             <Border.Background>
                 <SolidColorBrush Color="Black" Opacity=".7" />
