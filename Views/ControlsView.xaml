@@ -64,7 +64,7 @@
         </Button>
 
         <Button x:Name="OpenSettings">
-            <Image Source="/Resources/Star.png" />
+            <Image Source="/Resources/Wrench.png" />
         </Button>
 
         <Viewbox>
