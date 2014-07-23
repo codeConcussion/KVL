@@ -49,4 +49,4 @@ WebDeploy/
 *.ncb
 
 #installer
-Installer/*.exe
+Installer/Output/*.*
