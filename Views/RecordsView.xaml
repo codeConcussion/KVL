@@ -2,6 +2,7 @@
     x:Class="CodeConcussion.KVL.Views.RecordsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cal="http://www.caliburnproject.org"
     Background="WhiteSmoke"
     Width="300"
     Height="420">
@@ -25,6 +26,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <Label
@@ -32,16 +34,21 @@
                 FontWeight="Bold"
                 Background="Gray"
                 Margin="4" />
-            
+
             <Button
-                x:Name="Close"
+                cal:Message.Attach="Print($source)"
+                Width="24"
                 Margin="0 4 4 4"
                 Grid.Column="1">
-                
-                <Image
-                    Source="../Resources/Close.png"
-                    Width="16"
-                    Height="16" />
+                <Image Source="../Resources/Print.png" Width="16" Height="16" />
+            </Button>
+
+            <Button
+                x:Name="Close"
+                Width="24"
+                Margin="0 4 4 4"
+                Grid.Column="2">
+                <Image Source="../Resources/Close.png" Width="16" Height="16" />
             </Button>
         </Grid>
 

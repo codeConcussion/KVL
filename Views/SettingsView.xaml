@@ -22,13 +22,10 @@
 
             <Button
                 x:Name="Close"
+                Width="24"
                 Margin="0 4 4 4"
                 Grid.Column="1">
-
-                <Image
-                    Source="../Resources/Close.png"
-                    Width="16"
-                    Height="16" />
+                <Image Source="../Resources/Close.png" Width="16" Height="16" />
             </Button>
         </Grid>
 

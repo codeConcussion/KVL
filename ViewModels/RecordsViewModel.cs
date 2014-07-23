@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using CodeConcussion.KVL.Entities;
 using CodeConcussion.KVL.Utilities.Messages;
 
@@ -21,6 +24,21 @@ namespace CodeConcussion.KVL.ViewModels
         public void Close()
         {
             PublishMessage(MessageType.CloseRecords);
+        }
+
+        public void Print(FrameworkElement source)
+        {
+            var parent = VisualTreeHelper.GetParent(source);;
+            for(;;)
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+                if (parent is UserControl) break;
+                if (parent == null) return;
+            }
+
+            var dialog = new PrintDialog();
+            var print = dialog.ShowDialog();
+            if (print.GetValueOrDefault()) dialog.PrintVisual((Visual)parent, "KVL Records :: " + GameManager.User.Name);
         }
 
         private void Open()
