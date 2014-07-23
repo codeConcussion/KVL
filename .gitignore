@@ -48,14 +48,5 @@ WebDeploy/
 *.tlb
 *.ncb
 
-#Agent packages
-ReportDirector.Agent/bin/*.zip
-
-# Theme
-!ReportDirector.Web/styles/images
-ReportDirector.Web/images/*/
-ReportDirector.Web/Distributions/*
-ReportDirector.Web/styles/*/
-
-/ReportDirector.Common/BCrypt.Net.il
-/ReportDirector.Common/SmartFormat.il
+#installer
+Installer/*.exe
