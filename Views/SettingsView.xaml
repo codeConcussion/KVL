@@ -2,29 +2,66 @@
     x:Class="CodeConcussion.KVL.Views.SettingsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    xmlns:wpf="http://schemas.xceed.com/wpf/xaml/toolkit"
     Background="WhiteSmoke"
-    Width="200"
+    Width="150"
     Height="100">
 
-    <StackPanel Margin="4">
-        <Button
-            x:Name="Close"
-            HorizontalAlignment="Right"
-            Margin="4"
-            DockPanel.Dock="Top">
-            <Image Source="../Resources/Close.png" Width="16" Height="16" />
-        </Button>
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal">
-            <Label Content="_Background" Target="{Binding ElementName=BackgroundColor}" />
-            <xctk:ColorPicker
+            <Label
+                Content="Settings"
+                FontWeight="Bold"
+                Background="Gray"
+                Margin="4" />
+
+            <Button
+                x:Name="Close"
+                Margin="0 4 4 4"
+                Grid.Column="1">
+
+                <Image
+                    Source="../Resources/Close.png"
+                    Width="16"
+                    Height="16" />
+            </Button>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Label
+                Content="_Background"
+                Target="{Binding ElementName=BackgroundColor}" />
+            <wpf:ColorPicker
                 x:Name="BackgroundColor"
                 SelectedColor="{Binding BackgroundColor}"
-                Width="110"
-                Margin="4" />
-        </StackPanel>
+                Margin="4"
+                Grid.Column="1" />
 
-        <CheckBox x:Name="PlayErrorSound" Content="_Error sound" Margin="4 8" />
+            <Label
+                Content="_Error sound"
+                Target="{Binding ElementName=PlayErrorSound}"
+                Grid.Row="1" />
+            <CheckBox
+                x:Name="PlayErrorSound"
+                VerticalAlignment="Center"
+                Margin="4"
+                Grid.Column="1"
+                Grid.Row="1" />
+        </Grid>
     </StackPanel>
 </UserControl>

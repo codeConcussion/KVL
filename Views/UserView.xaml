@@ -3,30 +3,53 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Background="WhiteSmoke"
-    Width="250"
-    Height="56">
+    Width="200"
+    Height="70">
 
-    <StackPanel Orientation="Horizontal" Margin="8 16">
-        <Label
-            Content="_User"
-            Target="User"
-            Margin="4 0" />
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-        <TextBox
-            x:Name="User"
-            Text="{Binding User}"
-            Height="24"
-            Width="120"
-            Margin="4 0"
-            VerticalAlignment="Top"
-            VerticalContentAlignment="Center" />
+            <Label
+                Content="User"
+                FontWeight="Bold"
+                Background="Gray"
+                Margin="4" />
 
-        <Button
-            x:Name="Close"
-            Content="_OK"
-            Width="56"
-            Height="24"
-            Margin="4 0"
-            VerticalAlignment="Top" />
+            <Button
+                x:Name="Close"
+                Margin="0 4 4 4"
+                Grid.Column="1">
+
+                <Image
+                    Source="../Resources/Close.png"
+                    Width="16"
+                    Height="16" />
+            </Button>
+        </Grid>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox
+                x:Name="User"
+                VerticalContentAlignment="Center"
+                Height="24"
+                Margin="4" />
+            
+            <Button
+                x:Name="OK"
+                Content="_OK"
+                Width="60"
+                Height="24"
+                Margin="0 4 4 4"
+                Grid.Column="1" />
+        </Grid>
     </StackPanel>
 </UserControl>
