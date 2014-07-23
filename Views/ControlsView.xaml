@@ -48,23 +48,23 @@
             SelectedValuePath="Key" />
 
         <Button x:Name="StartGame" Visibility="{Binding IsPlaying, Converter={StaticResource InverseBoolToVisibility}}">
-            <Image Source="/Resources/Start.png" />
+            <Image Source="/Resources/Start.png" ToolTip="Start" />
         </Button>
 
         <Button x:Name="StopGame" Visibility="{Binding IsPlaying, Converter={StaticResource BoolToVisibility}}">
-            <Image Source="/Resources/Stop.png" />
+            <Image Source="/Resources/Stop.png" ToolTip="Stop" />
         </Button>
 
         <Button x:Name="OpenUser">
-            <Image Source="/Resources/User.png" />
+            <Image Source="/Resources/User.png" ToolTip="User" />
         </Button>
 
         <Button x:Name="OpenRecords">
-            <Image Source="/Resources/Star.png" />
+            <Image Source="/Resources/Star.png" ToolTip="Records" />
         </Button>
 
         <Button x:Name="OpenSettings">
-            <Image Source="/Resources/Wrench.png" />
+            <Image Source="/Resources/Wrench.png" ToolTip="Settings" />
         </Button>
 
         <Viewbox>
