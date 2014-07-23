@@ -47,3 +47,8 @@ Filename: "{app}\KVL.exe"; Description: "{cm:LaunchProgram,KVL}"; Flags: nowait 
 
 [Dirs]
 Name: "{app}\Users"; Permissions: everyone-full
+
+[UninstallDelete]
+Type: files; Name: "{app}\Users\*.*"
+Type: dirifempty; Name: "{app}\Users\"
+Type: dirifempty; Name: "{app}"
