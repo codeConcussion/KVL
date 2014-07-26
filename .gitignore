@@ -47,3 +47,6 @@ WebDeploy/
 *.pch
 *.tlb
 *.ncb
+
+# Installer
+Installer/Output/*.*
