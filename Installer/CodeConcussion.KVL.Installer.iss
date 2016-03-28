@@ -7,8 +7,8 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{40F2BB6B-A577-4532-9088-595DD28F5FAA}
 AppName=KVL
-AppVersion=1.01
-;AppVerName=KVL 1.01
+AppVersion=1.02
+;AppVerName=KVL 1.02
 AppPublisher=jubilantmath.com
 AppPublisherURL=http://www.jubilantmath.com/
 AppSupportURL=http://www.jubilantmath.com/
@@ -17,7 +17,7 @@ DefaultDirName={pf}\KVL
 DefaultGroupName=KVL
 AllowNoIcons=yes
 OutputBaseFilename="KVL Installer"
-SetupIconFile=D:\Dev\codeConcussion\CodeConcussion.KVL\Resources\KVL.ico
+SetupIconFile=C:\Dev\KVL\Resources\KVL.ico
 Compression=lzma
 SolidCompression=yes
 
@@ -28,14 +28,14 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\Dev\codeConcussion\CodeConcussion.KVL\bin\Release\KVL.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Dev\codeConcussion\CodeConcussion.KVL\bin\Release\KVL.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Dev\codeConcussion\CodeConcussion.KVL\bin\Release\Autofac.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Dev\codeConcussion\CodeConcussion.KVL\bin\Release\Caliburn.Micro.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Dev\codeConcussion\CodeConcussion.KVL\bin\Release\Caliburn.Micro.Platform.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Dev\codeConcussion\CodeConcussion.KVL\bin\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Dev\codeConcussion\CodeConcussion.KVL\bin\Release\System.Windows.Interactivity.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Dev\codeConcussion\CodeConcussion.KVL\bin\Release\Xceed.Wpf.Toolkit.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Dev\KVL\bin\Release\KVL.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Dev\KVL\bin\Release\KVL.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Dev\KVL\bin\Release\Autofac.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Dev\KVL\bin\Release\Caliburn.Micro.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Dev\KVL\bin\Release\Caliburn.Micro.Platform.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Dev\KVL\bin\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Dev\KVL\bin\Release\System.Windows.Interactivity.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Dev\KVL\bin\Release\Xceed.Wpf.Toolkit.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
