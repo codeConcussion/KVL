@@ -10,7 +10,7 @@ namespace CodeConcussion.KVL.Utilities
         [DebuggerStepThrough]
         public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
         {
-            foreach (T x in enumerable) action(x);
+            foreach (var x in enumerable) action(x);
         }
 
         [DebuggerStepThrough]
@@ -27,7 +27,7 @@ namespace CodeConcussion.KVL.Utilities
             if (value <= 0) return "";
             var minutes = (int)value / 60;
             var seconds = value - (minutes * 60);
-            return string.Format("{0:D2}:{1:00.0}", minutes, seconds);
+            return $"{minutes:D2}:{seconds:00.0}";
         }
     }
 }

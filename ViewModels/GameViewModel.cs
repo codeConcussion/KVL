@@ -4,8 +4,6 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using CodeConcussion.KVL.Utilities.Messages;
-using Control = System.Windows.Controls.Control;
-using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace CodeConcussion.KVL.ViewModels
 {
@@ -16,17 +14,17 @@ namespace CodeConcussion.KVL.ViewModels
             CurrentCardView = currentCardViewModel;
             PreviewCardView = previewCardViewModel;
             IsAnswerWrong = false;
-            EventManager.RegisterClassHandler(typeof(Control), UIElement.KeyDownEvent, new RoutedEventHandler(KeyDown));
+            EventManager.RegisterClassHandler(typeof(System.Windows.Controls.Control), UIElement.KeyDownEvent, new RoutedEventHandler(KeyDown));
         }
 
-        public CardViewModel CurrentCardView { get; private set; }
-        public CardViewModel PreviewCardView { get; private set; }
-        public Brush BackgroundColor { get { return new SolidColorBrush(GameManager.BackgroundColor); } }
+        public CardViewModel CurrentCardView { get; }
+        public CardViewModel PreviewCardView { get; }
+        public Brush BackgroundColor => new SolidColorBrush(GameManager.BackgroundColor);
 
         private bool _hasCurrentCard;
         public bool HasCurrentCard
         {
-            get { return _hasCurrentCard; }
+            get => _hasCurrentCard;
             set
             {
                 if (_hasCurrentCard == value) return;
@@ -38,7 +36,7 @@ namespace CodeConcussion.KVL.ViewModels
         private bool _hasPreviousCard;
         public bool HasPreviewCard
         {
-            get { return _hasPreviousCard; }
+            get => _hasPreviousCard;
             set
             {
                 if (_hasPreviousCard == value) return;
@@ -50,7 +48,7 @@ namespace CodeConcussion.KVL.ViewModels
         private bool _isAnswerWrong;
         public bool IsAnswerWrong
         {
-            get { return _isAnswerWrong; }
+            get => _isAnswerWrong;
             set
             {
                 //toggle flag for error animation

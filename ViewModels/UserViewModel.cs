@@ -10,7 +10,7 @@ namespace CodeConcussion.KVL.ViewModels
         private bool _isUserFocused = true;
         public bool IsUserFocused
         {
-            get { return _isUserFocused; }
+            get => _isUserFocused;
             set
             {
                 _isUserFocused = value;
@@ -21,7 +21,7 @@ namespace CodeConcussion.KVL.ViewModels
         private string _user;
         public string User
         {
-            get { return _user; }
+            get => _user;
             set
             {
                 if (_user == value) return;
@@ -37,7 +37,7 @@ namespace CodeConcussion.KVL.ViewModels
             PublishMessage(MessageType.CloseUser);
         }
 
-        public void OK()
+        public void Ok()
         {
             if (string.IsNullOrWhiteSpace(User)) return;
             GameManager.User = UserStorage.LoadUser(User);

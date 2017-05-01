@@ -23,7 +23,7 @@ namespace CodeConcussion.KVL.ViewModels
         
         public bool IsAddition
         {
-            get { return _operation == Operation.Addition; }
+            get => _operation == Operation.Addition;
             set
             {
                 if (!value) return;
@@ -36,7 +36,7 @@ namespace CodeConcussion.KVL.ViewModels
 
         public bool IsMultiplication
         {
-            get { return _operation == Operation.Multiplication; }
+            get => _operation == Operation.Multiplication;
             set
             {
                 if (!value) return;
@@ -47,15 +47,12 @@ namespace CodeConcussion.KVL.ViewModels
             }
         }
 
-        public bool IsPlaying
-        {
-            get { return GameManager.IsPlaying; }
-        }
+        public bool IsPlaying => GameManager.IsPlaying;
 
         private Deck _selectedDeck;
         public Deck SelectedDeck
         {
-            get { return _selectedDeck; }
+            get => _selectedDeck;
             set
             {
                 if (_selectedDeck == value) return;
@@ -76,14 +73,7 @@ namespace CodeConcussion.KVL.ViewModels
             }
         }
 
-        public string Progress
-        {
-            get
-            {
-                if (!GameManager.IsPlaying) return "";
-                return string.Format("{0} of {1}", GameManager.Progress, SelectedDeck.Cards.Count);
-            }
-        }
+        public string Progress => GameManager.IsPlaying ? $"{GameManager.Progress} of {SelectedDeck.Cards.Count}" : "";
 
         public string Timing
         {
