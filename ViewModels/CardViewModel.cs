@@ -22,7 +22,6 @@ namespace CodeConcussion.KVL.ViewModels
         }
 
         public string FirstLine => Card.FirstNumber.ToString(CultureInfo.InvariantCulture).PadLeft(2);
-
         public string SecondLine => Card.Operation.GetSign() + Card.SecondNumber.ToString(CultureInfo.InvariantCulture).PadLeft(2);
 
         private string _answer;
@@ -34,15 +33,6 @@ namespace CodeConcussion.KVL.ViewModels
                 if (_answer == value) return;
                 _answer = value;
                 NotifyOfPropertyChange(() => Answer);
-            }
-        }
-
-        public bool IsCorrect
-        {
-            get
-            {
-                var answer = int.Parse("0" + Answer.Trim());
-                return answer == Card.Answer;
             }
         }
 

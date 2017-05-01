@@ -28,11 +28,11 @@ namespace CodeConcussion.KVL.Utilities.Game
         public DateTime? StartedAt { get; private set; }
         public decimal Elapsed { get; private set; }
         public int Progress { get; private set; }
-        
+
         public bool CheckAnswer(string guess)
         {
-            var answer = int.Parse("0" + guess.Trim());
-            return answer == CurrentCard.Answer;
+            var isValid = int.TryParse(guess.Trim(), out int answer);
+            return isValid && answer == CurrentCard.Answer;
         }
 
         public void Deal()
