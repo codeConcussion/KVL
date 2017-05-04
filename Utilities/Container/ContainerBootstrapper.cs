@@ -86,7 +86,7 @@ namespace CodeConcussion.KVL.Utilities.Container
                 if (_container.TryResolveNamed(key, service, out instance)) return instance;
             }
 
-            throw new Exception($"Could not locate any instances of {key ?? service.Name}.");
+            throw new Exception(string.Format("Could not locate any instances of {0}.", key ?? service.Name));
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)

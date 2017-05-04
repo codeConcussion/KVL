@@ -7,7 +7,7 @@ namespace CodeConcussion.KVL.ViewModels
     {
         public Color BackgroundColor
         {
-            get => GameManager.BackgroundColor;
+            get { return GameManager.BackgroundColor; }
             set
             {
                 GameManager.BackgroundColor = value;
@@ -17,7 +17,7 @@ namespace CodeConcussion.KVL.ViewModels
 
         public bool PlayErrorSound
         {
-            get => GameManager.PlayErrorSound;
+            get { return GameManager.PlayErrorSound; }
             set
             {
                 GameManager.PlayErrorSound = value;

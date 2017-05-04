@@ -8,7 +8,10 @@ namespace CodeConcussion.KVL.Utilities.Game
     internal static class UserMessageConfiguration
     {
         private static Dictionary<UserMessage, string> _messages;
-        public static Dictionary<UserMessage, string> Messages => _messages ?? (_messages = GetMessages());
+        public static Dictionary<UserMessage, string> Messages
+        {
+            get { return _messages ?? (_messages = GetMessages()); }
+        }
 
         private static Dictionary<UserMessage, string> GetMessages()
         {

@@ -23,7 +23,8 @@ namespace CodeConcussion.KVL.Utilities.Game
 
         public static void SaveUser(User user)
         {
-            if (string.IsNullOrWhiteSpace(user?.Name)) return;
+            if (user == null) return;
+            if (string.IsNullOrWhiteSpace(user.Name)) return;
 
             var file = GetUserFile(user.Name);
             var json = JsonConvert.SerializeObject(user, Formatting.Indented);

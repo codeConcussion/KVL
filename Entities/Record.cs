@@ -22,6 +22,9 @@ namespace CodeConcussion.KVL.Entities
         public int Order { get; set; }
         public decimal Seconds { get; set; }
 
-        public string DisplayTime => Seconds.GetTiming();
+        public string DisplayTime
+        {
+            get { return Seconds.GetTiming(); }
+        }
     }
 }

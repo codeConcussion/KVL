@@ -11,8 +11,15 @@ namespace CodeConcussion.KVL.ViewModels
 {
     public sealed class RecordsViewModel : BaseViewModel
     {
-        public List<Record> AdditionRecords => GetRecords(Operation.Addition);
-        public List<Record> MultiplicationRecords => GetRecords(Operation.Multiplication);
+        public List<Record> AdditionRecords
+        {
+            get { return GetRecords(Operation.Addition); }
+        }
+
+        public List<Record> MultiplicationRecords
+        {
+            get { return GetRecords(Operation.Multiplication); }
+        }
 
         public void Close()
         {

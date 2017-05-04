@@ -20,23 +20,23 @@ namespace CodeConcussion.KVL.ViewModels
             RecordsView = recordsView;
             SettingsView = settingsView;
             UserView = userView;
-
+            
             SetTitle();
             IsUserActive = true;
         }
 
         public string DisplayName { get; set; }
-        public GameViewModel GameView { get; }
-        public ControlsViewModel ControlsView { get; }
-        public MessageViewModel MessageView { get; }
-        public RecordsViewModel RecordsView { get; }
-        public SettingsViewModel SettingsView { get; }
-        public UserViewModel UserView { get; }
+        public GameViewModel GameView { get; private set; }
+        public ControlsViewModel ControlsView { get; private set; }
+        public MessageViewModel MessageView { get; private set; }
+        public RecordsViewModel RecordsView { get; private set; }
+        public SettingsViewModel SettingsView { get; private set; }
+        public UserViewModel UserView { get; private set; }
 
         private bool _isMessageActive;
         public bool IsMessageActive
         {
-            get => _isMessageActive;
+            get { return _isMessageActive; }
             private set
             {
                 if (_isMessageActive == value) return;
@@ -48,7 +48,7 @@ namespace CodeConcussion.KVL.ViewModels
         private bool _isRecordsActive;
         public bool IsRecordsActive
         {
-            get => _isRecordsActive;
+            get { return _isRecordsActive; }
             private set
             {
                 if (_isRecordsActive == value) return;
@@ -60,7 +60,7 @@ namespace CodeConcussion.KVL.ViewModels
         private bool _isSettingsActive;
         public bool IsSettingsActive
         {
-            get => _isSettingsActive;
+            get { return _isSettingsActive; }
             private set
             {
                 if (_isSettingsActive == value) return;
@@ -72,7 +72,7 @@ namespace CodeConcussion.KVL.ViewModels
         private bool _isUserActive;
         public bool IsUserActive
         {
-            get => _isUserActive;
+            get { return _isUserActive; }
             private set
             {
                 if (_isUserActive == value) return;

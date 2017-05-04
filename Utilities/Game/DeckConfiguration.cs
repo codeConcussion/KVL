@@ -9,7 +9,10 @@ namespace CodeConcussion.KVL.Utilities.Game
     internal static class DeckConfiguration
     {
         private static List<Deck> _decks;
-        public static List<Deck> Decks => _decks ?? (_decks = CreateDecks());
+        public static List<Deck> Decks
+        {
+            get { return _decks ?? (_decks = CreateDecks()); }
+        }
 
         private static List<Deck> CreateDecks()
         {

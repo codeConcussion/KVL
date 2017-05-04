@@ -41,7 +41,7 @@
                 Margin="4" />
             
             <Button
-                x:Name="Ok"
+                x:Name="OK"
                 Content="_OK"
                 Width="60"
                 Height="24"

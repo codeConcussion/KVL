@@ -16,7 +16,7 @@ namespace CodeConcussion.KVL.ViewModels
         private string _message;
         public string Message
         {
-            get => _message ?? "";
+            get { return _message ?? ""; }
             set
             {
                 if (_message == value) return;
@@ -28,7 +28,7 @@ namespace CodeConcussion.KVL.ViewModels
         private bool _isNewRecord;
         public bool IsNewRecord
         {
-            get => _isNewRecord;
+            get { return _isNewRecord; }
             set
             {
                 if (_isNewRecord == value) return;

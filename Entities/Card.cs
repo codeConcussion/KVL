@@ -9,7 +9,10 @@ namespace CodeConcussion.KVL.Entities
         public int SecondNumber { get; set; }
         public Operation Operation { get; set; }
 
-        public int Answer => _answerStrategy[Operation](FirstNumber, SecondNumber);
+        public int Answer
+        {
+            get { return _answerStrategy[Operation](FirstNumber, SecondNumber); }
+        }
 
         private readonly Dictionary<Operation, Func<int, int, int>> _answerStrategy = new Dictionary<Operation, Func<int, int, int>>
         {

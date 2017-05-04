@@ -13,7 +13,8 @@ namespace CodeConcussion.KVL.Utilities.Container
 
         private static void OnComponentActivated(object sender, ActivatedEventArgs<object> e)
         {
-            var handler = e?.Instance as IHandle;
+            if (e == null) return;
+            var handler = e.Instance as IHandle;
             if (handler != null) e.Context.Resolve<IEventAggregator>().Subscribe(handler);
         }
     }
