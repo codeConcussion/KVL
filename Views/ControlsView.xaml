@@ -35,10 +35,14 @@
                 x:Name="IsAddition"
                 Content="_Addition"
                 IsChecked="True" />
-                
+
             <RadioButton
                 x:Name="IsMultiplication"
                 Content="_Multiplication" />
+
+            <RadioButton
+                x:Name="IsSignedNumbers"
+                Content="_Signed numbers" />
         </StackPanel>
         
         <ComboBox

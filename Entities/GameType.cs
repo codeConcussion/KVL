@@ -1,10 +1,9 @@
 ﻿namespace CodeConcussion.KVL.Entities
 {
-    public enum Operation
+    public enum GameType
     {
         Addition,
-        Subtraction,
         Multiplication,
-        Division
+        SignedNumbers
     }
 }

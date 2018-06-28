@@ -11,20 +11,17 @@ namespace CodeConcussion.KVL.Entities
             if (deck == null) return;
             Key = deck.Key;
             Description = deck.Description;
-            Operation = deck.Operation;
+            GameType = deck.GameType;
             Order = deck.Order;
             Seconds = seconds;
         }
 
         public string Key { get; set; }
         public string Description { get; set; }
-        public Operation Operation { get; set; }
+        public GameType GameType { get; set; }
         public int Order { get; set; }
         public decimal Seconds { get; set; }
 
-        public string DisplayTime
-        {
-            get { return Seconds.GetTiming(); }
-        }
+        public string DisplayTime => Seconds.GetTiming();
     }
 }

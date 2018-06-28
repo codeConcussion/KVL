@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CodeConcussion.KVL.Entities;
+using CodeConcussion.KVL.Utilities.Messages;
+using System;
 using System.Collections.Generic;
 using System.Windows.Media;
-using CodeConcussion.KVL.Entities;
-using CodeConcussion.KVL.Utilities.Messages;
 
 namespace CodeConcussion.KVL.Utilities.Game
 {
@@ -16,8 +16,8 @@ namespace CodeConcussion.KVL.Utilities.Game
 
         private readonly MessageDispatch _dispatcher;
 
+        public List<Deck> AllDecks => DeckConfiguration.Decks;
         public User User { get; set; }
-        public List<Deck> AllDecks { get { return DeckConfiguration.Decks; } }
         public Color BackgroundColor { get; set; }
         public bool PlayErrorSound { get; set; }
 

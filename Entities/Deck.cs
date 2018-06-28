@@ -8,15 +8,15 @@ namespace CodeConcussion.KVL.Entities
     {
         public string Key { get; set; }
         public string Description { get; set; }
-        public Operation Operation { get; set; }
+        public GameType GameType { get; set; }
         public int Order { get; set; }
 
         public Card CurrentCard { get; set; }
         public List<Card> Cards { get; set; }
 
-        public int CurrentIndex { get { return Cards.IndexOf(CurrentCard); } }
-        public bool HasCurrentCard { get { return CurrentCard != null; } }
-        public bool IsLastCard { get { return CurrentCard == Cards.Last(); } }
+        public int CurrentIndex => Cards.IndexOf(CurrentCard);
+        public bool HasCurrentCard => CurrentCard != null;
+        public bool IsLastCard => CurrentCard == Cards.Last();
 
         public Card Deal()
         {

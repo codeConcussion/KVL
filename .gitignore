@@ -5,12 +5,8 @@
 # Keep the library folders
 !/Libs
 
-reportdirector.db
-Raven_Data/
-Plugins/
 packages/
-ReportDirector.Data/Raven/
-ReportDirector.Data/Database/
+.vs/
 
 # Merge Conflict Backups
 *.orig

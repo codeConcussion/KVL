@@ -107,6 +107,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Entities\GameType.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Utilities\Messages\ViewModelMessage.cs" />
     <Compile Include="Utilities\Messages\MessageType.cs" />

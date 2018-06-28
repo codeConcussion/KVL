@@ -11,15 +11,9 @@ namespace CodeConcussion.KVL.ViewModels
 {
     public sealed class RecordsViewModel : BaseViewModel
     {
-        public List<Record> AdditionRecords
-        {
-            get { return GetRecords(Operation.Addition); }
-        }
-
-        public List<Record> MultiplicationRecords
-        {
-            get { return GetRecords(Operation.Multiplication); }
-        }
+        public List<Record> AdditionRecords => GetRecords(GameType.Addition);
+        public List<Record> MultiplicationRecords => GetRecords(GameType.Multiplication);
+        public List<Record> SignedNumberRecords => GetRecords(GameType.SignedNumbers);
 
         public void Close()
         {
@@ -47,17 +41,17 @@ namespace CodeConcussion.KVL.ViewModels
             NotifyOfPropertyChange(() => MultiplicationRecords);
         }
 
-        private List<Record> GetRecords(Operation operation)
+        private List<Record> GetRecords(GameType gameType)
         {
             if (GameManager.User == null) return new List<Record>();
 
             var allRecords = GameManager.AllDecks
-                .Where(x => x.Operation == operation)
+                .Where(x => x.GameType == gameType)
                 .Select(x => new Record(x, 0m))
                 .ToList();
 
             var userRecords = GameManager.User.Records
-                .Where(x => x.Operation == operation)
+                .Where(x => x.GameType == gameType)
                 .OrderBy(x => x.Order)
                 .ToList();
 

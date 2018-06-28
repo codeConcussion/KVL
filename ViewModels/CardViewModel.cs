@@ -10,7 +10,7 @@ namespace CodeConcussion.KVL.ViewModels
         private Card _card;
         public Card Card
         {
-            get { return _card ?? (_card = new Card()); }
+            get => _card ?? (_card = new Card());
             set
             {
                 _card = value;
@@ -21,19 +21,13 @@ namespace CodeConcussion.KVL.ViewModels
             }
         }
 
-        public string FirstLine
-        {
-            get { return Card.FirstNumber.ToString(CultureInfo.InvariantCulture).PadLeft(2); }
-        }
-        public string SecondLine
-        {
-            get { return Card.Operation.GetSign() + Card.SecondNumber.ToString(CultureInfo.InvariantCulture).PadLeft(2); }
-        }
+        public string FirstLine => Card.FirstNumber.ToString(CultureInfo.InvariantCulture).PadLeft(2);
+        public string SecondLine => Card.Operation.GetSign() + Card.SecondNumber.ToString(CultureInfo.InvariantCulture).PadLeft(2);
 
         private string _answer;
         public string Answer
         {
-            get { return _answer ?? (_answer = ""); }
+            get => _answer ?? (_answer = "");
             set
             {
                 if (_answer == value) return;

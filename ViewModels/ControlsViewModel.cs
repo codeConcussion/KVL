@@ -1,10 +1,10 @@
-﻿using System;
+﻿using CodeConcussion.KVL.Entities;
+using CodeConcussion.KVL.Utilities;
+using CodeConcussion.KVL.Utilities.Messages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
-using CodeConcussion.KVL.Entities;
-using CodeConcussion.KVL.Utilities;
-using CodeConcussion.KVL.Utilities.Messages;
 
 namespace CodeConcussion.KVL.ViewModels
 {
@@ -19,43 +19,47 @@ namespace CodeConcussion.KVL.ViewModels
         }
 
         private readonly DispatcherTimer _timer = new DispatcherTimer();
-        private Operation _operation = Operation.Addition;
+        private GameType _gameType = GameType.Addition;
         
         public bool IsAddition
         {
-            get { return _operation == Operation.Addition; }
+            get => _gameType == GameType.Addition;
             set
             {
                 if (!value) return;
-                _operation = Operation.Addition;
-                NotifyOfPropertyChange(() => IsAddition);
-                NotifyOfPropertyChange(() => IsMultiplication);
-                NotifyOfPropertyChange(() => Decks);
+                _gameType = GameType.Addition;
+                NotifyOfOperationChange();
             }
         }
 
         public bool IsMultiplication
         {
-            get { return _operation == Operation.Multiplication; }
+            get => _gameType == GameType.Multiplication;
             set
             {
                 if (!value) return;
-                _operation = Operation.Multiplication;
-                NotifyOfPropertyChange(() => IsAddition);
-                NotifyOfPropertyChange(() => IsMultiplication);
-                NotifyOfPropertyChange(() => Decks);
+                _gameType = GameType.Multiplication;
+                NotifyOfOperationChange();
             }
         }
 
-        public bool IsPlaying
+        public bool IsSignedNumbers
         {
-            get { return GameManager.IsPlaying; }
+            get => _gameType == GameType.SignedNumbers;
+            set
+            {
+                if (!value) return;
+                _gameType = GameType.SignedNumbers;
+                NotifyOfOperationChange();
+            }
         }
+
+        public bool IsPlaying => GameManager.IsPlaying;
 
         private Deck _selectedDeck;
         public Deck SelectedDeck
         {
-            get { return _selectedDeck; }
+            get => _selectedDeck;
             set
             {
                 if (_selectedDeck == value) return;
@@ -70,20 +74,13 @@ namespace CodeConcussion.KVL.ViewModels
         {
             get
             {
-                var decks = GameManager.AllDecks.Where(x => x.Operation == _operation).ToList();
+                var decks = GameManager.AllDecks.Where(x => x.GameType == _gameType).ToList();
                 SelectedDeck = decks.FirstOrDefault();
                 return decks;
             }
         }
 
-        public string Progress
-        {
-            get
-            {
-                if (!GameManager.IsPlaying) return "";
-                return string.Format("{0} of {1}", GameManager.Progress, SelectedDeck.Cards.Count);
-            }
-        }
+        public string Progress => !GameManager.IsPlaying ? "" : $"{GameManager.Progress} of {SelectedDeck.Cards.Count}";
 
         public string Timing
         {
@@ -137,6 +134,14 @@ namespace CodeConcussion.KVL.ViewModels
             map.Add(MessageType.OpenSettings, x => StopGame());
             map.Add(MessageType.OpenUser, x => StopGame());
             map.Add(MessageType.StopGame, x => StopGame());
+        }
+
+        private void NotifyOfOperationChange()
+        {
+            NotifyOfPropertyChange(() => IsAddition);
+            NotifyOfPropertyChange(() => IsMultiplication);
+            NotifyOfPropertyChange(() => IsSignedNumbers);
+            NotifyOfPropertyChange(() => Decks);
         }
     }
 }
