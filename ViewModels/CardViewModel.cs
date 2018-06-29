@@ -39,9 +39,14 @@ namespace CodeConcussion.KVL.ViewModels
         public void AddDigit(int digit)
         {
             var answer = Answer + digit;
+            var isNegative = answer.StartsWith("-");
+
+            if (isNegative) answer = answer.Remove(0, 1);
             if (answer.Length == 4) answer = answer.Remove(0, 1);
             if (answer.All(x => x == '0')) answer = "0";
             if (answer.Length > 1) answer = answer.TrimStart('0');
+            if (isNegative) answer = $"-{answer}";
+
             Answer = answer;
         }
 
@@ -49,6 +54,11 @@ namespace CodeConcussion.KVL.ViewModels
         {
             var length = Answer.Length;
             Answer = length <= 1 ? "" : Answer.Substring(0, length - 1);
+        }
+
+        public void ToggleSign()
+        {
+            Answer = Answer.StartsWith("-") ? Answer.Substring(1) : $"-{Answer}";
         }
     }
 }

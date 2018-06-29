@@ -119,7 +119,12 @@ namespace CodeConcussion.KVL.ViewModels
             CurrentCardView.Card = GameManager.CurrentCard;
             PreviewCardView.Card = GameManager.PreviewCard;
         }
-        
+
+        private void ToggleSign()
+        {
+            CurrentCardView.ToggleSign();
+        }
+
         protected override void AddMessageHandlers(Dictionary<MessageType, Action<dynamic>> map)
         {
             map.Add(MessageType.StartGame, x => StartGame());
@@ -136,6 +141,8 @@ namespace CodeConcussion.KVL.ViewModels
             { Key.Delete, x => x.Delete() },
             { Key.Decimal, x => x.Delete() },
             { Key.Enter, x => x.Answer() },
+            { Key.Subtract, x => x.ToggleSign() },
+            { Key.OemMinus, x => x.ToggleSign() },
             { Key.D0, x => x.AddDigit(0) },
             { Key.D1, x => x.AddDigit(1) },
             { Key.D2, x => x.AddDigit(2) },
