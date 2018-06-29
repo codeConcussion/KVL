@@ -31,8 +31,7 @@ namespace CodeConcussion.KVL.Utilities.Game
 
         public bool CheckAnswer(string guess)
         {
-            var answer = default(int);
-            var isValid = int.TryParse(guess.Trim(), out answer);
+            var isValid = int.TryParse(guess.Trim(), out var answer);
             return isValid && answer == CurrentCard.Answer;
         }
 

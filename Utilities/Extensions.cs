@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CodeConcussion.KVL.Entities;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using CodeConcussion.KVL.Entities;
 
 namespace CodeConcussion.KVL.Utilities
 {
@@ -10,15 +10,13 @@ namespace CodeConcussion.KVL.Utilities
         [DebuggerStepThrough]
         public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
         {
-            foreach (T x in enumerable) action(x);
+            foreach (var x in enumerable) action(x);
         }
 
         [DebuggerStepThrough]
         public static string GetSign(this Operation value)
         {
-            if (value == Operation.Addition) return "+";
-            if (value == Operation.Multiplication) return "x";
-            return "";
+            return OperationSignMap[value];
         }
 
         [DebuggerStepThrough]
@@ -27,7 +25,15 @@ namespace CodeConcussion.KVL.Utilities
             if (value <= 0) return "";
             var minutes = (int)value / 60;
             var seconds = value - (minutes * 60);
-            return string.Format("{0:D2}:{1:00.0}", minutes, seconds);
+            return $"{minutes:D2}:{seconds:00.0}";
         }
+
+        private static Dictionary<Operation, string> OperationSignMap = new Dictionary<Operation, string>
+        {
+            [Operation.Addition] = "+",
+            [Operation.Subtraction] = "-",
+            [Operation.Multiplication] = "x",
+            [Operation.Division] = "/"
+        };
     }
 }

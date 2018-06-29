@@ -1,11 +1,11 @@
-﻿using System;
+﻿using CodeConcussion.KVL.Entities;
+using CodeConcussion.KVL.Utilities.Messages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using CodeConcussion.KVL.Entities;
-using CodeConcussion.KVL.Utilities.Messages;
 
 namespace CodeConcussion.KVL.ViewModels
 {

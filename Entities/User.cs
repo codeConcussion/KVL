@@ -15,8 +15,8 @@ namespace CodeConcussion.KVL.Entities
         private List<Record> _records;
         public List<Record> Records
         {
-            get { return _records ?? (_records = new List<Record>()); }
-            set { _records = value; }
+            get => _records ?? (_records = new List<Record>());
+            set => _records = value;
         }
 
         public bool UpdateRecord(Record record)

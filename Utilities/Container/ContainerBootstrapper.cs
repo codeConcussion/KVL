@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Windows;
-using Autofac;
+﻿using Autofac;
 using Caliburn.Micro;
 using CodeConcussion.KVL.Utilities.Game;
 using CodeConcussion.KVL.Utilities.Messages;
 using CodeConcussion.KVL.Utilities.Xaml;
 using CodeConcussion.KVL.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Windows;
 
 namespace CodeConcussion.KVL.Utilities.Container
 {
@@ -86,7 +86,7 @@ namespace CodeConcussion.KVL.Utilities.Container
                 if (_container.TryResolveNamed(key, service, out instance)) return instance;
             }
 
-            throw new Exception(string.Format("Could not locate any instances of {0}.", key ?? service.Name));
+            throw new Exception($"Could not locate any instances of {key ?? service.Name}.");
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)
@@ -94,12 +94,12 @@ namespace CodeConcussion.KVL.Utilities.Container
             DisplayRootViewFor<ShellViewModel>();
 
             Application.Current.MainWindow.SizeToContent = SizeToContent.Manual;
-            Application.Current.MainWindow.Left = (SystemParameters.PrimaryScreenWidth - 780) / 2;
-            Application.Current.MainWindow.Top = (SystemParameters.PrimaryScreenHeight - 780) / 2;
-            Application.Current.MainWindow.Width = 780;
-            Application.Current.MainWindow.Height = 780;
-            Application.Current.MainWindow.MinWidth = 480;
-            Application.Current.MainWindow.MinHeight = 480;
+            Application.Current.MainWindow.Left = (SystemParameters.PrimaryScreenWidth - 1000) / 2;
+            Application.Current.MainWindow.Top = (SystemParameters.PrimaryScreenHeight - 800) / 2;
+            Application.Current.MainWindow.Width = 1000;
+            Application.Current.MainWindow.Height = 800;
+            Application.Current.MainWindow.MinWidth = 500;
+            Application.Current.MainWindow.MinHeight = 500;
         }
 
         private void ExtendBinder()

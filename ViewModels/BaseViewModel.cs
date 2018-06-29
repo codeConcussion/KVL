@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using CodeConcussion.KVL.Utilities.Container;
 using CodeConcussion.KVL.Utilities.Game;
 using CodeConcussion.KVL.Utilities.Messages;
+using System.Collections.Generic;
 
 namespace CodeConcussion.KVL.ViewModels
 {

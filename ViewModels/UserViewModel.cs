@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using CodeConcussion.KVL.Utilities.Game;
+﻿using CodeConcussion.KVL.Utilities.Game;
 using CodeConcussion.KVL.Utilities.Messages;
+using System;
+using System.Collections.Generic;
 
 namespace CodeConcussion.KVL.ViewModels
 {
@@ -10,7 +10,7 @@ namespace CodeConcussion.KVL.ViewModels
         private bool _isUserFocused = true;
         public bool IsUserFocused
         {
-            get { return _isUserFocused; }
+            get => _isUserFocused;
             set
             {
                 _isUserFocused = value;
@@ -21,7 +21,7 @@ namespace CodeConcussion.KVL.ViewModels
         private string _user;
         public string User
         {
-            get { return _user; }
+            get => _user;
             set
             {
                 if (_user == value) return;

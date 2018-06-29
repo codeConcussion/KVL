@@ -1,7 +1,7 @@
-﻿using System.Globalization;
-using System.Linq;
-using CodeConcussion.KVL.Entities;
+﻿using CodeConcussion.KVL.Entities;
 using CodeConcussion.KVL.Utilities;
+using System.Globalization;
+using System.Linq;
 
 namespace CodeConcussion.KVL.ViewModels
 {

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using CodeConcussion.KVL.Entities;
+using Newtonsoft.Json;
+using System;
 using System.Configuration;
 using System.IO;
 using System.Text;
-using CodeConcussion.KVL.Entities;
-using Newtonsoft.Json;
 
 namespace CodeConcussion.KVL.Utilities.Game
 {
@@ -23,8 +23,7 @@ namespace CodeConcussion.KVL.Utilities.Game
 
         public static void SaveUser(User user)
         {
-            if (user == null) return;
-            if (string.IsNullOrWhiteSpace(user.Name)) return;
+            if (string.IsNullOrWhiteSpace(user?.Name)) return;
 
             var file = GetUserFile(user.Name);
             var json = JsonConvert.SerializeObject(user, Formatting.Indented);
