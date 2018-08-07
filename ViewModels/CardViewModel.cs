@@ -15,14 +15,14 @@ namespace CodeConcussion.KVL.ViewModels
             {
                 _card = value;
                 NotifyOfPropertyChange(() => Card);
-                NotifyOfPropertyChange(() => FirstLine);
-                NotifyOfPropertyChange(() => SecondLine);
+                NotifyOfPropertyChange(() => FirstNumber);
+                NotifyOfPropertyChange(() => SecondNumber);
                 Answer = "";
             }
         }
 
-        public string FirstLine => Card.FirstNumber.ToString(CultureInfo.InvariantCulture).PadLeft(2);
-        public string SecondLine => Card.Operation.GetSign() + Card.SecondNumber.ToString(CultureInfo.InvariantCulture).PadLeft(2);
+        public string FirstNumber => Card.FirstNumber.ToString(CultureInfo.InvariantCulture).PadLeft(2);
+        public string SecondNumber => Card.Operation.GetSign() + Card.SecondNumber.ToString(CultureInfo.InvariantCulture).PadLeft(2);
 
         private string _answer;
         public string Answer
@@ -52,8 +52,7 @@ namespace CodeConcussion.KVL.ViewModels
 
         public void RemoveDigit()
         {
-            var length = Answer.Length;
-            Answer = length <= 1 ? "" : Answer.Substring(0, length - 1);
+            Answer = Answer.Length <= 1 ? "" : Answer.Substring(0, Answer.Length - 1);
         }
 
         public void ToggleSign()

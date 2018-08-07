@@ -26,8 +26,8 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="FirstLine" xml:space="preserve" />
-            <Label x:Name="SecondLine" Grid.Row="1" />
+            <Label x:Name="FirstNumber" xml:space="preserve" />
+            <Label x:Name="SecondNumber" Grid.Row="1" />
             <Rectangle
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Top"

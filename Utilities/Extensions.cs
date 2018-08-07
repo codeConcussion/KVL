@@ -28,12 +28,12 @@ namespace CodeConcussion.KVL.Utilities
             return $"{minutes:D2}:{seconds:00.0}";
         }
 
-        private static Dictionary<Operation, string> OperationSignMap = new Dictionary<Operation, string>
+        private static readonly Dictionary<Operation, string> OperationSignMap = new Dictionary<Operation, string>
         {
             [Operation.Addition] = "+",
             [Operation.Subtraction] = "-",
             [Operation.Multiplication] = "x",
-            [Operation.Division] = "/"
+            [Operation.Division] = "÷"
         };
     }
 }

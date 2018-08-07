@@ -10,30 +10,29 @@ namespace CodeConcussion.KVL.ViewModels
     {
         protected BaseViewModel()
         {
-            _dispatcher = ContainerBootstrapper.Resolve<MessageDispatch>();
-            _gameManager = ContainerBootstrapper.Resolve<GameManager>();
-            _messageHandlers = new Dictionary<MessageType, System.Action<dynamic>>();
+            Dispatcher = ContainerBootstrapper.Resolve<MessageDispatch>();
+            MessageHandlers = new Dictionary<MessageType, System.Action<dynamic>>();
+            GameManager = ContainerBootstrapper.Resolve<GameManager>();
 
             // ReSharper disable once DoNotCallOverridableMethodsInConstructor
-            AddMessageHandlers(_messageHandlers);
+            AddMessageHandlers(MessageHandlers);
         }
 
-        private readonly MessageDispatch _dispatcher;
-        private readonly Dictionary<MessageType, System.Action<dynamic>> _messageHandlers;
 
-        private readonly GameManager _gameManager;
-        protected GameManager GameManager { get { return _gameManager; } }
+        private MessageDispatch Dispatcher { get; }
+        private Dictionary<MessageType, System.Action<dynamic>> MessageHandlers;
+        protected GameManager GameManager { get; }
 
         protected virtual void AddMessageHandlers(Dictionary<MessageType, System.Action<dynamic>> map) { }
 
         protected void PublishMessage(MessageType type, dynamic data = null)
         {
-            _dispatcher.PublishMessage(type, data);
+            Dispatcher.PublishMessage(type, data);
         }
 
         public void Handle(ViewModelMessage message)
         {
-            if (_messageHandlers.ContainsKey(message.Type)) _messageHandlers[message.Type](message.Data);
+            if (MessageHandlers.ContainsKey(message.Type)) MessageHandlers[message.Type](message.Data);
         }
     }
 }
