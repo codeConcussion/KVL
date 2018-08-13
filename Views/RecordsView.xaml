@@ -63,6 +63,9 @@
 
                 <Label FontWeight="Bold" Margin="4 16 4 0">Multiplication</Label>
                 <ItemsControl ItemsSource="{Binding MultiplicationRecords}" ItemTemplate="{StaticResource RecordTemplate}" />
+
+                <Label FontWeight="Bold" Margin="4 16 4 0">Signed Numbers</Label>
+                <ItemsControl ItemsSource="{Binding SignedNumberRecords}" ItemTemplate="{StaticResource RecordTemplate}" />
             </StackPanel>
         </ScrollViewer>
     </StackPanel>

@@ -39,6 +39,7 @@ namespace CodeConcussion.KVL.ViewModels
         {
             NotifyOfPropertyChange(() => AdditionRecords);
             NotifyOfPropertyChange(() => MultiplicationRecords);
+            NotifyOfPropertyChange(() => SignedNumberRecords);
         }
 
         private List<Record> GetRecords(GameType gameType)
