@@ -7,8 +7,8 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{40F2BB6B-A577-4532-9088-595DD28F5FAA}
 AppName=KVL
-AppVersion=1.02
-;AppVerName=KVL 1.02
+AppVersion=1.03
+;AppVerName=KVL 1.03
 AppPublisher=jubilantmath.com
 AppPublisherURL=http://www.jubilantmath.com/
 AppSupportURL=http://www.jubilantmath.com/
