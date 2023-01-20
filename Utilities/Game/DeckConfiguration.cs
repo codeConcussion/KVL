@@ -12,13 +12,6 @@ namespace CodeConcussion.KVL.Utilities.Game
         private static List<Deck> _decks;
         public static List<Deck> Decks => _decks ?? (_decks = CreateDecks());
 
-        private static readonly Dictionary<GameType, Func<Card, Operation>> CardOperationMap = new Dictionary<GameType, Func<Card, Operation>>
-        {
-            [GameType.Addition] = x => Operation.Addition,
-            [GameType.Multiplication] = x => Operation.Multiplication,
-            [GameType.SignedNumbers] = x => x.Operation //the operation is stored on each individual card
-        };
-
         private static List<Deck> CreateDecks()
         {
             var settings = ConfigurationManager.AppSettings.AllKeys.Where(x => x.StartsWith("Deck."));
@@ -35,9 +28,7 @@ namespace CodeConcussion.KVL.Utilities.Game
         {
             try
             {
-                var deck = JsonConvert.DeserializeObject<Deck>(json);
-                deck.Cards.ForEach(x => x.Operation = CardOperationMap[deck.GameType](x));
-                return deck;
+                return JsonConvert.DeserializeObject<Deck>(json);
             }
             catch
             {
